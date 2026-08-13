@@ -74,9 +74,19 @@ def index():
                 User.name.ilike(
                     f"%{search}%"
                 ),
+
+                User.surname.ilike(
+                    f"%{search}%"
+                ),
+
                 User.email.ilike(
                     f"%{search}%"
                 ),
+
+                User.contact_number.ilike(
+                    f"%{search}%"
+                ),
+
                 User.role.ilike(
                     f"%{search}%"
                 )
@@ -126,6 +136,8 @@ def create():
 
         user = User(
             name=form.name.data,
+            surname=form.surname.data,
+            contact_number=form.contact_number.data,
             email=form.email.data,
             role=form.role.data,
             active=form.active.data
@@ -200,9 +212,22 @@ def edit(id):
             )
 
         user.name = form.name.data
+
+        user.surname = (
+            form.surname.data
+        )
+
+        user.contact_number = (
+            form.contact_number.data
+        )
+
         user.email = form.email.data
+
         user.role = form.role.data
-        user.active = form.active.data
+
+        user.active = (
+            form.active.data
+        )
 
         if form.password.data:
 
@@ -293,8 +318,4 @@ def delete(id):
         "success"
     )
 
-    return redirect(
-        url_for(
-            "users.index"
-        )
-    )
+    return redirect
