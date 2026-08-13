@@ -1,0 +1,13 @@
+System Failure Alert
+
+Component:
+{{ component }}
+
+Time:
+{{ timestamp }}
+
+Error:
+
+{{ error_message }}
+
+Immediate attention is required.

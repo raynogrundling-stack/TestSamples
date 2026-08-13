@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>
+
+        Submission Report
+
+    </title>
+
+    <style>
+
+        body {
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            font-size: 12px;
+
+            color: #000;
+
+            margin: 30px;
+
+        }
+
+        .header {
+
+            width: 100%;
+
+            overflow: hidden;
+
+            margin-bottom: 30px;
+
+        }
+
+        .company {
+
+            float: left;
+
+            width: 70%;
+
+        }
+
+        .barcode {
+
+            float: right;
+
+            text-align: right;
+
+            width: 30%;
+
+        }
+
+        .barcode img {
+
+            max-width: 220px;
+
+            height: auto;
+
+        }
+
+        .title {
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+
+        }
+
+        table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+        }
+
+        th {
+
+            text-align: left;
+
+            background: #efefef;
+
+            padding: 8px;
+
+            border: 1px solid #ccc;
+
+            width: 30%;
+
+        }
+
+        td {
+
+            padding: 8px;
+
+            border: 1px solid #ccc;
+
+        }
+
+        .section {
+
+            margin-top: 25px;
+
+        }
+
+        .section-title {
+
+            background: #f5f5f5;
+
+            padding: 8px;
+
+            border: 1px solid #ccc;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+
+        }
+
+        .footer {
+
+            margin-top: 40px;
+
+            text-align: center;
+
+            font-size: 11px;
+
+            color: #666;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="header">
+
+        <div class="company">
+
+            <div class="title">
+
+                Laboratory Submission Report
+
+            </div>
+
+            <div>
+
+                Generated: {{ submission.submitted_at }}
+
+            </div>
+
+        </div>
+
+        <div class="barcode">
+
+            {% if barcode_path %}
+
+            {{ barcode_path }}
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <div class="section-title">
+
+            Submission Information
+
+        </div>
+
+        <table>
+
+            <tr>
+
+                <th>
+
+                    Reference
+
+                </th>
+
+                <td>
+
+                    {{ submission.order_reference }}
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <th>
+
+                    Sample Number
+
+                </th>
+
+                <td>
+
+                    {{ submission.sample_number }}
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <th>
+
+                    Status
+
+                </th>
+
+                <td>
+
+                    {{ submission.status }}
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <th>
+
+                    Submitted Date
+
+                </th>
+
+                <td>
+
+                    {{ submission.submitted_at }}
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div class="section">
+
+        <div class="section-title">
+
+            Customer Information
+
+        </div>
+
+        <table>
+
+            <tr>
+
+                <th>
+
+                    Customer
+
+                </th>
+
+                <td>
+
+                    {{ submission.customer_name }}
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div class="section">
+
+        <div class="section-title">
+
+            Sample Information
+
+        </div>
+
+        <table>
+
+            <tr>
+
+                <th>
+
+                    Sample Type
+
+                </th>
+
+                <td>
+
+                    {{ submission.sample_type }}
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <th>
+
+                    Test Required
+
+                </th>
+
+                <td>
+
+                    {{ submission.test_required }}
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <th>
+
+                    Description
+
+                </th>
+
+                <td>
+
+                    {{ submission.sample_description }}
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    {% if submission.comments %}
+
+    <div class="section">
+
+        <div class="section-title">
+
+            Comments
+
+        </div>
+
+        <div>
+
+            {{ submission.comments }}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+    <div class="footer">
+
+        Laboratory Forms System
+
+    </div>
+
+</body>
+
+</html>

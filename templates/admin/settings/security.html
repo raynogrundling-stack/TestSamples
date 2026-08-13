@@ -1,0 +1,34 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Security Settings
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <h3 class="mb-4">
+        Security Settings
+    </h3>
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.max_login_attempts.label(class="form-label") }}
+                    {{ form.max_login_attempts(class="form-control") }}
+                </div>
+                <div class="mb-3">
+                    {{ form.session_timeout_minutes.label(class="form-label") }}
+                    {{ form.session_timeout_minutes(class="form-control") }}
+                </div>
+                <button type="submit"
+                        class="btn btn-success">
+                    Save Security Settings
+                </button>
+                  <a href="{{ url_for('settings.index') }}"
+                  class="btn btn-secondary">
+                    Back to Settings
+                  </a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

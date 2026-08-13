@@ -1,0 +1,27 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Customer Export
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <h3>
+        Customer Export
+    </h3>
+    <div class="card">
+        <div class="card-body">
+            <p>
+                Export all customer records
+                to CSV format.
+            </p>
+             <a href="{{ url_for('exports.customers_download') }}"
+              class="btn btn-primary">
+                Download Customer Export
+            </a>
+            <a href="{{ url_for('exports.index') }}"
+              class="btn btn-primary">
+               Cancel
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Import Customers
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <h3 class="mb-4">
+        Import Customers
+    </h3>
+    <div class="card border-warning">
+        <div class="card-header bg-warning">
+            Warning
+        </div>
+        <div class="card-body">
+            Importing may overwrite
+            existing application data.
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <form method="POST"
+                  enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label">
+                        Customer CSV File
+                    </label>
+                    <input
+                        type="file"
+                        name="file"
+                        accept=".csv"
+                        class="form-control"
+                        required>
+                </div>
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+                    Import Customers
+                </button>
+                <a href="{{ url_for('imports.index') }}"
+                  class="btn btn-primary">
+                   Cancel
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

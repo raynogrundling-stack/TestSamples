@@ -1,0 +1,91 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+Failed Emails
+{% endblock %}
+
+{% block admin_content %}
+
+<div class="container-fluid">
+
+    <h3 class="mb-4">
+
+        Failed Emails
+
+    </h3>
+
+    <table class="table table-striped">
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+                <th>Subject</th>
+                <th>Error</th>
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for email in emails %}
+
+            <tr>
+
+                <td>{{ email.id }}</td>
+
+                <td>{{ email.subject }}</td>
+
+                <td>{{ email.failure_reason }}</td>
+
+                <td>
+
+                     }}"
+                        class="btn btn-sm btn-primary">
+
+                        View
+
+                    </a>
+
+                     }}"
+                        style="display:inline;">
+
+                        <button
+                            type="submit"
+                            class="btn btn-sm btn-warning">
+
+                            Retry
+
+                        </button>
+
+                    </form>
+
+                </td>
+
+            </tr>
+
+            {% else %}
+
+            <tr>
+
+                <td colspan="4"
+                    class="text-center">
+
+                    No failed emails.
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

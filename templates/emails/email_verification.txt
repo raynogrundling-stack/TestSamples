@@ -1,0 +1,8 @@
+Email Verification
+
+Please verify your email address
+using the link below:
+
+{{ verification_link }}
+
+This link expires in 24 hours.

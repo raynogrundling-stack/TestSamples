@@ -1,0 +1,60 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Edit Option
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <h3 class="mb-4">
+        Edit Option
+    </h3>
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label">
+                        Value
+                    </label>
+                    <input type="text"
+                           name="value"
+                           class="form-control"
+                           value="{{ option.value }}"
+                           required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">
+                        Description
+                    </label>
+                    <textarea name="description"
+                              class="form-control">{{ option.description }}</textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">
+                        Sort Order
+                    </label>
+                    <input type="number"
+                           name="sort_order"
+                           class="form-control"
+                           value="{{ option.sort_order }}">
+                </div>
+                <div class="form-check mb-3">
+                    <input type="checkbox"
+                           name="active"
+                           class="form-check-input"
+                           {% if option.active %}checked{% endif %}>
+                    <label class="form-check-label">
+                        Active
+                    </label>
+                </div>
+                <button type="submit"
+                        class="btn btn-primary">
+                    Update
+                </button>
+                 <a href="{{url_for('dropdowns.index')}}"
+                   class="btn btn-secondary">
+                    Cancel
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

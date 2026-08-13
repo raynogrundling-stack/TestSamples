@@ -1,0 +1,11 @@
+Account Invitation
+
+Hello {{ user.name }}
+
+An account has been created for you.
+
+Please activate your account using:
+
+{{ invitation_link }}
+
+This invitation expires in 7 days.

@@ -1,0 +1,18 @@
+<footer class="mt-5 border-top bg-light">
+  <div class="container-fluid py-3">
+    <div class="row align-items-center">
+      <div class="col-md-6 text-center text-md-start">
+        <a href="https://itdirect.co.za" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+          <img src="{{ url_for('static', filename='images/itdirect-logo.png') }}"
+          alt="IT Direct" style="height:60px;" class="me-2">
+          <small class="text-muted">Developed and Supported by IT Direct (Pty) Ltd</small>
+        </a>
+      </div>
+      <div class="col-md-6 text-center text-md-end">
+        {% if settings and settings.sandbox_enabled %}
+        <span class="badge bg-warning text-dark">Sandbox Mode</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</footer>

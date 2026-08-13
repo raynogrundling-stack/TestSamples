@@ -1,0 +1,162 @@
+services:
+
+  app:
+
+    build: .
+
+    container_name: laboratory_forms_app
+
+    restart: unless-stopped
+
+    env_file:
+      - .env
+
+    depends_on:
+      - postgres
+      - redis
+
+    ports:
+      - "5000:5000"
+
+    volumes:
+      - ./uploads:/app/uploads
+      - ./generated:/app/generated
+      - ./backups:/app/backups
+      - ./logs:/app/logs
+      - ./uploads:/app/static/uploads
+
+    environment:
+
+      FLASK_ENV: development
+
+      DATABASE_URL: postgresql://formsuser:formspassword@postgres:5432/formsdb
+
+      REDIS_URL: redis://redis:6379/0
+
+    command:
+      [
+        "gunicorn",
+        "--bind",
+        "0.0.0.0:5000",
+        "--workers",
+        "4",
+        "--threads",
+        "4",
+        "--timeout",
+        "120",
+        "app:app"
+      ]
+
+  celery-worker:
+
+    build: .
+
+    container_name: laboratory_forms_celery
+
+    restart: unless-stopped
+
+    env_file:
+      - .env
+
+    depends_on:
+      - postgres
+      - redis
+
+    volumes:
+      - ./uploads:/app/uploads
+      - ./generated:/app/generated
+      - ./backups:/app/backups
+      - ./logs:/app/logs
+
+    environment:
+
+      DATABASE_URL: postgresql://formsuser:formspassword@postgres:5432/formsdb
+
+      REDIS_URL: redis://redis:6379/0
+
+    command:
+      [
+        "celery",
+        "-A",
+        "celery_worker.celery",
+        "worker",
+        "--loglevel=info"
+      ]
+
+  celery-beat:
+
+    build: .
+
+    container_name: laboratory_forms_beat
+
+    restart: unless-stopped
+
+    env_file:
+      - .env
+
+    depends_on:
+      - postgres
+      - redis
+
+    volumes:
+      - ./uploads:/app/uploads
+      - ./generated:/app/generated
+      - ./backups:/app/backups
+      - ./logs:/app/logs
+
+    environment:
+
+      DATABASE_URL: postgresql://formsuser:formspassword@postgres:5432/formsdb
+
+      REDIS_URL: redis://redis:6379/0
+
+    command:
+      [
+        "celery",
+        "-A",
+        "celery_worker.celery",
+        "beat",
+        "--loglevel=info"
+      ]
+
+  postgres:
+
+    image: postgres:16
+
+    container_name: laboratory_forms_postgres
+
+    restart: unless-stopped
+
+    environment:
+
+      POSTGRES_DB: formsdb
+
+      POSTGRES_USER: formsuser
+
+      POSTGRES_PASSWORD: formspassword
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+
+    image: redis:7
+
+    container_name: laboratory_forms_redis
+
+    restart: unless-stopped
+
+    ports:
+      - "6379:6379"
+
+    volumes:
+      - redis_data:/data
+
+volumes:
+
+  postgres_data:
+
+  redis_data:

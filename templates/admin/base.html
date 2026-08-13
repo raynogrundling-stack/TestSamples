@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-2">
+        <div class="list-group">
+            <a href="/admin/users" class="list-group-item list-group-item-action"> Users</a>
+            <a href="/admin/customers" class="list-group-item list-group-item-action"> Customers</a>
+            <a href="/admin/dropdowns" class="list-group-item list-group-item-action"> Dropdown Setup</a>
+            <a href="{{url_for('submissions.dashboard')}}" class="list-group-item list-group-item-action"> Submissions</a>
+            <a href="/admin/settings" class="list-group-item list-group-item-action"> Settings</a>
+            <a href="/admin/emails" class="list-group-item list-group-item-action"> Email Monitoring</a> 
+            <a href="/admin/migrations" class="list-group-item list-group-item-action"> Migrate</a>
+            <a href="{{url_for('monitoring.overview')}}" class="list-group-item list-group-item-action"> Monitoring</a>
+            <a href="/admin/audit" class="list-group-item list-group-item-action"> Audit Logs</a>
+            <a href="/admin/backups" class="list-group-item list-group-item-action"> Backup</a>
+            <a href="/admin/restores" class="list-group-item list-group-item-action"> Restore</a>
+            <a href="/admin/imports" class="list-group-item list-group-item-action"> Import</a>
+            <a href="{{url_for('exports.index')}}" class="list-group-item list-group-item-action"> Export</a>
+        </div>
+    </div>
+    <div class="col-md-10">
+        {% block admin_content %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

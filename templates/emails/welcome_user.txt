@@ -1,0 +1,13 @@
+Welcome
+
+Hello {{ user.name }},
+
+Your account has been created.
+
+Setup your password here:
+
+{{ setup_url }}
+
+This link expires in 24 hours.
+
+Supported by IT Direct (Pty) Ltd

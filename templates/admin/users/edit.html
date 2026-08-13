@@ -1,0 +1,77 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Edit User
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <h3 class="mb-4">
+        Edit User
+    </h3>
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.name.label(
+                        class="form-label"
+                    ) }}
+                    {{ form.name(
+                        class="form-control"
+                    ) }}
+                </div>
+                <div class="mb-3">
+                    {{ form.email.label(
+                        class="form-label"
+                    ) }}
+                    {{ form.email(
+                        class="form-control"
+                    ) }}
+                </div>
+                <div class="mb-3">
+                    {{ form.role.label(
+                        class="form-label"
+                    ) }}
+                    {{ form.role(
+                        class="form-select"
+                    ) }}
+                </div>
+                <div class="form-check mb-4">
+                    {{ form.active(
+                        class="form-check-input"
+                    ) }}
+                    {{ form.active.label(
+                        class="form-check-label"
+                    ) }}
+                </div>
+                <div class="alert alert-info">
+                    Leave password fields empty to
+                    keep the current password.
+                </div>
+                <div class="mb-3">
+                    {{ form.password.label(
+                        class="form-label"
+                    ) }}
+                    {{ form.password(
+                        class="form-control"
+                    ) }}
+                </div>
+                <div class="mb-3">
+                    {{ form.confirm_password.label(
+                        class="form-label"
+                    ) }}
+                    {{ form.confirm_password(
+                        class="form-control"
+                    ) }}
+                </div>
+                {{ form.submit(
+                    class="btn btn-primary"
+                ) }}
+                 <a href="{{url_for('users.index')}}"
+                   class="btn btn-secondary">
+                    Cancel
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

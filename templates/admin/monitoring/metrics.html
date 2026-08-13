@@ -1,0 +1,51 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+Metrics
+{% endblock %}
+
+{% block admin_content %}
+
+<div class="container-fluid">
+
+    <h3 class="mb-4">
+
+        System Metrics
+
+    </h3>
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <table class="table table-bordered">
+
+                {% for key, value in metrics.items() %}
+
+                <tr>
+
+                    <th width="35%">
+
+                        {{ key }}
+
+                    </th>
+
+                    <td>
+
+                        {{ value }}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

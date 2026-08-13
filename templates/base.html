@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>
+        {% if settings and settings.company_name %}
+            {{ settings.company_name }} -
+        {% endif %}
+        {% block title %}
+        Laboratory Forms System
+        {% endblock %}
+    </title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="d-flex align-items-center">
+                {% if settings and settings.company_logo %}
+                <img
+                    src="{{ url_for('static',
+                                    filename=settings.company_logo) }}"
+                    alt="Company Logo"
+                    class="me-3"
+                    style="height:80px">
+                {% endif %}
+                <div class="d-flex flex-column">
+                    {% if settings and settings.company_name %}
+                        <div class="fw-bold text-white">
+                            {{ settings.company_name }}
+                        </div>
+                        <div class="text-white">
+                            Laboratory Forms System
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% if current_user.is_authenticated %}
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text me-3">
+                    {{ current_user.name }}
+                </span>
+                <a class="nav-link"
+                  href="{{ url_for('auth.logout') }}">
+                    Logout
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </nav>
+    {% if settings and settings.sandbox_enabled %}
+    <div class="alert alert-warning text-center mb-0 rounded-0">
+        <strong>
+            SANDBOX MODE ACTIVE
+        </strong>
+    </div>
+    {% endif %}
+    <div class="container-fluid mt-3">
+        {% with messages =
+            get_flashed_messages(
+                with_categories=true
+            )
+        %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div
+                        class="alert alert-{{ category }}"
+                    >
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}
+        {% endblock %}
+    </div>
+    {% include "request_footer.html" %}
+    <script 
+     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>

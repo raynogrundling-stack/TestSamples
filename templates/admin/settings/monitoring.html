@@ -1,0 +1,78 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Monitoring Settings
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <h3 class="mb-4">
+        Monitoring Settings
+    </h3>
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="form-check mb-3">
+                    {{ form.monitoring_enabled(
+                        class="form-check-input"
+                    ) }}
+                    {{ form.monitoring_enabled.label(
+                        class="form-check-label"
+                    ) }}
+                </div>
+                <div class="form-check mb-3">
+                    {{ form.prometheus_enabled(
+                        class="form-check-input"
+                    ) }}
+                    {{ form.prometheus_enabled.label(
+                        class="form-check-label"
+                    ) }}
+                </div>
+                <div class="form-check mb-3">
+                    {{ form.grafana_enabled(
+                        class="form-check-input"
+                    ) }}
+                    {{ form.grafana_enabled.label(
+                        class="form-check-label"
+                    ) }}
+                </div>
+                <hr>
+                <div class="form-check mb-3">
+                    {{ form.sandbox_enabled(
+                        class="form-check-input"
+                    ) }}
+                    {{ form.sandbox_enabled.label(
+                        class="form-check-label"
+                    ) }}
+                </div>
+                {% if form.sandbox_enabled.data %}
+                <div class="alert alert-warning">
+                    <strong>
+                        Sandbox Mode Enabled
+                    </strong>
+                    <ul class="mb-0 mt-2">
+                        <li>
+                            Live email delivery is disabled.
+                        </li>
+                        <li>
+                            Production integrations should not be used.
+                        </li>
+                        <li>
+                            Test data may be removed when sandbox mode is disabled.
+                        </li>
+                    </ul>
+                </div>
+                {% endif %}
+                <div class="mt-4">
+                    {{ form.submit(
+                        class="btn btn-success"
+                    ) }}
+                  <a href="{{ url_for('settings.index') }}"
+                  class="btn btn-secondary">
+                    Back to Settings
+                  </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

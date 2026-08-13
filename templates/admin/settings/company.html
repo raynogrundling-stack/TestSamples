@@ -1,0 +1,72 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Company Settings
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <h3 class="mb-4">
+        Company Settings
+    </h3>
+    <div class="card">
+        <div class="card-body">
+            <form method="POST"
+                  enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.company_name.label(
+                        class="form-label"
+                    ) }}
+                    {{ form.company_name(
+                        class="form-control"
+                    ) }}
+                    {% for error in form.company_name.errors %}
+                    <div class="text-danger">
+                        {{ error }}
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">
+                        Company Logo
+                    </label>
+                    <input
+                        type="file"
+                        name="company_logo"
+                        accept=".png,.jpg,.jpeg,.svg"
+                        class="form-control">
+                    <div class="form-text">
+                        Upload a logo to display beside the company name in the navigation bar.
+                    </div>
+                </div>
+                {% if settings and settings.company_logo %}
+                <div class="mb-4">
+                    <label class="form-label">
+                        Current Logo
+                    </label>
+                    <div>
+                        <img
+                            src="{{ url_for('static', filename=settings.company_logo) }}"
+                            alt="Company Logo"
+                            class="img-fluid" style="height:100px">
+                    </div>
+                    <div class="form-check">
+                        {{ form.remove_logo(class="form-check-input") }}
+                        {{ form.remove_logo.label(class="form-check-label") }}
+                    </div>
+                    <div class="form-text">
+                        Tick this box to remove the current company logo.
+                    </div>
+                </div>
+                {% endif %}
+                {{ form.submit(
+                    class="btn btn-primary"
+                ) }}
+                <a href="{{ url_for('settings.index') }}"
+                   class="btn btn-secondary">
+                    Cancel
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

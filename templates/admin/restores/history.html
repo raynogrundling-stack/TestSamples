@@ -1,0 +1,96 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Restore History
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3>
+            Restore History
+        </h3>
+        <a href="{{ url_for('restore.index') }}" class="btn btn-sm btn-outline-primary">
+            Back to Restores
+        </a>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            Historical Restore Jobs
+        </div>
+        <div class="card-body">
+            <table
+                class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Backup File</th>
+                        <th>Status</th>
+                        <th>Started</th>
+                        <th>Completed</th>
+                        <th>Duration</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for restore in restores %}
+                    <tr>
+                        <td>
+                            {{ restore.id }}
+                        </td>
+                        <td>
+                            {{ restore.backup_filename }}
+                        </td>
+                        <td>
+                            {% if restore.status == "COMPLETED" %}
+                                <span class="badge bg-success">
+                                    COMPLETED
+                                </span>
+                            {% elif restore.status == "FAILED" %}
+                                <span class="badge bg-danger">
+                                    FAILED
+                                </span>
+                            {% elif restore.status == "RUNNING" %}
+                                <span class="badge bg-warning text-dark">
+                                    RUNNING
+                                </span>
+                            {% else %}
+                                <span class="badge bg-secondary">
+                                    {{ restore.status }}
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ restore.started_at or "-" }}
+                        </td>
+                        <td>
+                            {{ restore.completed_at or "-" }}
+                        </td>
+                        <td>
+                            {% if restore.duration_seconds %}
+                                {{ restore.duration_seconds }}
+                                sec
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                        <td>
+                             <a href="{{ url_for('restore.details', restore_id=restore.id) }}"
+                                class="btn btn-sm btn-primary">
+                                View
+                            </a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td
+                            colspan="7"
+                            class="text-center">
+                            No restore history found.
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

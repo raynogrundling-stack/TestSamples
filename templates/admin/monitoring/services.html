@@ -1,0 +1,94 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+Services
+{% endblock %}
+
+{% block admin_content %}
+
+<div class="container-fluid">
+
+    <h3 class="mb-4">
+
+        Service Status
+
+    </h3>
+
+    <table class="table table-striped">
+
+        <thead>
+
+            <tr>
+
+                <th>Service</th>
+                <th>Status</th>
+                <th>Last Check</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for service in services %}
+
+            <tr>
+
+                <td>
+
+                    {{ service.name }}
+
+                </td>
+
+                <td>
+
+                    {% if service.status == "ONLINE" %}
+
+                    <span class="badge bg-success">
+
+                        ONLINE
+
+                    </span>
+
+                    {% else %}
+
+                    <span class="badge bg-danger">
+
+                        OFFLINE
+
+                    </span>
+
+                    {% endif %}
+
+                </td>
+
+                <td>
+
+                    {{ service.last_check }}
+
+                </td>
+
+            </tr>
+
+            {% else %}
+
+            <tr>
+
+                <td colspan="3"
+                    class="text-center">
+
+                    No service information available.
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "admin/base.html" %}
+{% block title %}
+System Settings
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <h3 class="mb-4">
+        System Settings
+    </h3>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Company Settings
+                    </h5>
+                    <p class="text-muted">
+                        Company name and system identity.
+                    </p>
+                    <a href="{{ url_for('settings.company') }}"
+                    class="btn btn-primary">
+                        Manage
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        SMTP Settings
+                    </h5>
+                    <p class="text-muted">
+                        Email delivery configuration.
+                    </p>
+                      <a href="{{ url_for('settings.smtp_test') }}"
+                        class="btn btn-primary">
+                        Manage
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Security Settings
+                    </h5>
+                    <p class="text-muted">
+                        Login and session controls.
+                    </p>
+                      <a href="{{ url_for('settings.security') }}"
+                        class="btn btn-primary">
+                        Manage
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Monitoring Settings
+                    </h5>
+                    <p class="text-muted">
+                        Monitoring, metrics and sandbox mode.
+                    </p>
+                      <a href="{{ url_for('settings.monitoring') }}"
+                        class="btn btn-primary">
+                        Manage
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Printing Settings
+                    </h5>
+                    <p class="text-muted">
+                        Browser and automatic printing options.
+                    </p>
+                      <a href="{{ url_for('settings.printing') }}"
+                        class="btn btn-primary">
+                        Manage
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

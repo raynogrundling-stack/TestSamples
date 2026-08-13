@@ -1,0 +1,70 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Edit Customer
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <h3 class="mb-4">
+        Edit Customer
+    </h3>
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+                <div class="mb-3">
+                    <label class="form-label">
+                        Customer Name
+                    </label>
+                    <input
+                        type="text"
+                        name="customer_name"
+                        class="form-control"
+                        value="{{ customer.customer_name }}"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">
+                        Customer Code
+                    </label>
+                    <input
+                        type="text"
+                        name="customer_code"
+                        class="form-control"
+                        value="{{ customer.customer_code }}"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">
+                        Contact Number
+                    </label>
+                    <input
+                        type="text"
+                        name="contact_number"
+                        class="form-control"
+                        value="{{ customer.contact_number }}">
+                </div>
+                <div class="form-check mb-3">
+                    <input
+                        type="checkbox"
+                        name="active"
+                        class="form-check-input"
+                        {% if customer.active %}
+                        checked
+                        {% endif %}>
+                    <label class="form-check-label">
+                        Active
+                    </label>
+                </div>
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+                    Update
+                </button>
+                 }}"
+                   class="btn btn-secondary">
+                    Cancel
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

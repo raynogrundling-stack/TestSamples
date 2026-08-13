@@ -1,0 +1,80 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Dropdown Categories
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3>
+            Dropdown Categories
+        </h3>
+        <a href="{{ url_for('dropdowns.create_category') }}" class="btn btn-primary btn-sm">
+            Create Category
+        </a>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th width="220">
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for category in categories %}
+                    <tr>
+                        <td>
+                            {{ category.name }}
+                        </td>
+                        <td>
+                            {{ category.description }}
+                        </td>
+                        <td>
+                            {% if category.active %}
+                            <span class="badge bg-success">
+                                Active
+                            </span>
+                            {% else %}
+                            <span class="badge bg-secondary">
+                                Inactive
+                            </span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{url_for('dropdowns.category', id=category.id)}}"
+                               class="btn btn-primary btn-sm">
+                                Options
+                            </a>
+                             <a href="{{url_for('dropdowns.edit_category', id=category.id)}}"
+                               class="btn btn-warning btn-sm">
+                                Edit
+                             </a>
+                             <from methods=["POST"] 
+                                  action="{{url_for('dropdowns.delete_option', id=category.id)}}"
+                                  class="d-inline">
+                                <button type="submit"
+                                        class="btn btn-danger btn-sm">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4"
+                            class="text-center">
+                            No categories defined.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Failures
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <h3 class="mb-4">
+        Failure Log
+    </h3>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Source</th>
+                <th>Severity</th>
+                <th>Message</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for failure in failures %}
+            <tr>
+                <td>
+                    {{ failure.id }}
+                </td>
+                <td>
+                    {{ failure.source }}
+                </td>
+                <td>
+                    {% if failure.severity == "CRITICAL" %}
+                    <span class="badge bg-danger">
+                        CRITICAL
+                    </span>
+                    {% elif failure.severity == "WARNING" %}
+                    <span class="badge bg-warning text-dark">
+                        WARNING
+                    </span>
+                    {% else %}
+                    <span class="badge bg-secondary">
+                        {{ failure.severity }}
+                    </span>
+                    {% endif %}
+                </td>
+                <td>
+                    {{ failure.error_message }}
+                </td>
+                <td>
+                    {{ failure.created_at }}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5"
+                    class="text-center">
+                    No failures recorded.
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

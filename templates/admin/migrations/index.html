@@ -1,0 +1,61 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Database Migrations
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <h3 class="mb-4">
+        Database Migrations
+    </h3>
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5>
+                        Current Version
+                    </h5>
+                    <p>
+                        View current migration state.
+                    </p>
+                    <a href="{{ url_for('migrations.current') }}"
+                       class="btn btn-primary">
+                        View Current
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5>
+                        Migration History
+                    </h5>
+                    <p>
+                        Review upgrade history.
+                    </p>
+                    <a href="{{ url_for('migrations.history') }}"
+                       class="btn btn-primary">
+                        View History
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5>
+                        Migration Failures
+                    </h5>
+                    <p>
+                        Review migration errors.
+                    </p>
+                    <a href="{{ url_for('migrations.failures') }}"
+                       class="btn btn-danger">
+                        View Failures
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends "admin/base.html" %}
+{% block title %}
+{{ category.name }}
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3>
+            {{ category.name }}
+        </h3>
+        <a href="{{ url_for('dropdowns.index') }}"
+                   class="btn btn-secondary">
+            Back
+        </a>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">
+            Add Option
+        </div>
+        <div class="card-body">
+             <form method="POST"
+                action="{{ url_for('dropdowns.create_option', category_id=category.id)}}">
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text"
+                               name="value"
+                               class="form-control"
+                               placeholder="Value"
+                               required>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text"
+                               name="description"
+                               class="form-control"
+                               placeholder="Description">
+                    </div>
+                    <div class="col-md-2">
+                        <input type="number"
+                               name="sort_order"
+                               class="form-control"
+                               value="0">
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-check mt-2">
+                            <input type="checkbox"
+                                   name="active"
+                                   checked
+                                   class="form-check-input">
+                            <label class="form-check-label">
+                                Active
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="submit"
+                                class="btn btn-success">
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Value</th>
+                        <th>Description</th>
+                        <th>Sort Order</th>
+                        <th>Status</th>
+                        <th width="150">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for option in options %}
+                    <tr>
+                        <td>{{ option.value }}</td>
+                        <td>{{ option.description }}</td>
+                        <td>{{ option.sort_order }}</td>
+                        <td>
+                            {% if option.active %}
+                            <span class="badge bg-success">
+                                Active
+                            </span>
+                            {% else %}
+                            <span class="badge bg-secondary">
+                                Inactive
+                            </span>
+                            {% endif %}
+                        </td>
+                        <td>
+                             <a href="{{url_for('dropdowns.edit_option', id=option.id)}}"
+                               class="btn btn-primary btn-sm">
+                                Edit
+                            </a>
+                        </td>
+                        <form method="POST"
+                              action <button type="submit"
+                                    class="btn btn-danger btn-sm">
+                                Delete
+                            </button>
+                        </form>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5"
+                            class="text-center">
+                            No options defined.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "admin/base.html" %}
+{% block title %}
+System Monitoring
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <h3 class="mb-4">
+        System Monitoring Dashboard
+    </h3>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5>
+                        System Status
+                    </h5>
+                    <h3>
+                        {{ health.status or "Healthy" }}
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-info text-white mb-3">
+                <div class="card-body">
+                    <h5>
+                        Services
+                    </h5>
+                    <h3>
+                        {{ metrics.services or 0 }}
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-warning mb-3">
+                <div class="card-body">
+                    <h5>
+                        Failures
+                    </h5>
+                    <h3>
+                        {{ metrics.failures or 0 }}
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Quick Access
+                </div>
+                <div class="card-body">
+                    <a href="{{ url_for('monitoring.uptime') }}"
+                       class="btn btn-secondary">
+                        Uptime
+                    </a>
+                    <a href="{{ url_for('monitoring.services') }}"
+                       class="btn btn-secondary">
+                        Services
+                    </a>
+                    <a href="{{ url_for('monitoring.metrics') }}"
+                       class="btn btn-secondary">
+                        Metrics
+                    </a>
+                    <a href="{{ url_for('monitoring.failures') }}"
+                       class="btn btn-danger">
+                        Failures
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

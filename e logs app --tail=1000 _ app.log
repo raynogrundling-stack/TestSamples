@@ -1,0 +1,870 @@
+laboratory_forms_app  | ===================================
+laboratory_forms_app  | Laboratory Forms System Startup
+laboratory_forms_app  | ===================================
+laboratory_forms_app  | Waiting for PostgreSQL...
+laboratory_forms_app  | Database ready
+laboratory_forms_app  | Running database migrations...
+laboratory_forms_app  | Creating required directories...
+laboratory_forms_app  | Starting application...
+laboratory_forms_app  | [2026-08-06 06:30:38 +0000] [1] [INFO] Starting gunicorn 22.0.0
+laboratory_forms_app  | [2026-08-06 06:30:38 +0000] [1] [INFO] Listening at: http://0.0.0.0:5000 (1)
+laboratory_forms_app  | [2026-08-06 06:30:38 +0000] [1] [INFO] Using worker: gthread
+laboratory_forms_app  | [2026-08-06 06:30:38 +0000] [17] [INFO] Booting worker with pid: 17
+laboratory_forms_app  | [2026-08-06 06:30:39 +0000] [18] [INFO] Booting worker with pid: 18
+laboratory_forms_app  | [2026-08-06 06:30:39 +0000] [19] [INFO] Booting worker with pid: 19
+laboratory_forms_app  | [2026-08-06 06:30:39 +0000] [20] [INFO] Booting worker with pid: 20
+laboratory_forms_app  | 2026-08-06 06:58:41,681 ERROR (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | psycopg2.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | 
+laboratory_forms_app  | The above exception was the direct cause of the following exception:
+laboratory_forms_app  | 
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 870, in full_dispatch_request
+laboratory_forms_app  |     rv = self.dispatch_request()
+laboratory_forms_app  |          ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 855, in dispatch_request
+laboratory_forms_app  |     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/app/routes/main.py", line 20, in index
+laboratory_forms_app  |     if current_user.is_authenticated:
+laboratory_forms_app  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 318, in __get__
+laboratory_forms_app  |     obj = instance._get_current_object()
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 526, in _get_current_object
+laboratory_forms_app  |     return get_name(local())
+laboratory_forms_app  |                     ^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 25, in <lambda>
+laboratory_forms_app  |     current_user = LocalProxy(lambda: _get_user())
+laboratory_forms_app  |                                       ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 370, in _get_user
+laboratory_forms_app  |     current_app.login_manager._load_user()
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/login_manager.py", line 364, in _load_user
+laboratory_forms_app  |     user = self._user_callback(user_id)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/app/app.py", line 118, in load_user
+laboratory_forms_app  |     return User.query.get(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "<string>", line 2, in get
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/deprecations.py", line 386, in warned
+laboratory_forms_app  |     return fn(*args, **kwargs)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1127, in get
+laboratory_forms_app  |     return self._get_impl(ident, loading.load_on_pk_identity)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1136, in _get_impl
+laboratory_forms_app  |     return self.session._get_impl(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3881, in _get_impl
+laboratory_forms_app  |     return db_load_fn(
+laboratory_forms_app  |            ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 695, in load_on_pk_identity
+laboratory_forms_app  |     session.execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2373, in execute
+laboratory_forms_app  |     return self._execute_internal(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2271, in _execute_internal
+laboratory_forms_app  |     result: Result[Any] = compile_state_cls.orm_execute_statement(
+laboratory_forms_app  |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+laboratory_forms_app  |     result = conn.execute(
+laboratory_forms_app  |              ^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+laboratory_forms_app  |     return meth(
+laboratory_forms_app  |            ^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+laboratory_forms_app  |     return connection._execute_clauseelement(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+laboratory_forms_app  |     ret = self._execute_context(
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+laboratory_forms_app  |     return self._exec_single_context(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+laboratory_forms_app  |     self._handle_dbapi_exception(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+laboratory_forms_app  |     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | sqlalchemy.exc.InternalError: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)
+laboratory_forms_app  | 2026-08-06 06:58:42,617 ERROR (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | psycopg2.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | 
+laboratory_forms_app  | The above exception was the direct cause of the following exception:
+laboratory_forms_app  | 
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 870, in full_dispatch_request
+laboratory_forms_app  |     rv = self.dispatch_request()
+laboratory_forms_app  |          ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 855, in dispatch_request
+laboratory_forms_app  |     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/app/routes/main.py", line 20, in index
+laboratory_forms_app  |     if current_user.is_authenticated:
+laboratory_forms_app  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 318, in __get__
+laboratory_forms_app  |     obj = instance._get_current_object()
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 526, in _get_current_object
+laboratory_forms_app  |     return get_name(local())
+laboratory_forms_app  |                     ^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 25, in <lambda>
+laboratory_forms_app  |     current_user = LocalProxy(lambda: _get_user())
+laboratory_forms_app  |                                       ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 370, in _get_user
+laboratory_forms_app  |     current_app.login_manager._load_user()
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/login_manager.py", line 364, in _load_user
+laboratory_forms_app  |     user = self._user_callback(user_id)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/app/app.py", line 118, in load_user
+laboratory_forms_app  |     return User.query.get(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "<string>", line 2, in get
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/deprecations.py", line 386, in warned
+laboratory_forms_app  |     return fn(*args, **kwargs)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1127, in get
+laboratory_forms_app  |     return self._get_impl(ident, loading.load_on_pk_identity)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1136, in _get_impl
+laboratory_forms_app  |     return self.session._get_impl(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3881, in _get_impl
+laboratory_forms_app  |     return db_load_fn(
+laboratory_forms_app  |            ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 695, in load_on_pk_identity
+laboratory_forms_app  |     session.execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2373, in execute
+laboratory_forms_app  |     return self._execute_internal(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2271, in _execute_internal
+laboratory_forms_app  |     result: Result[Any] = compile_state_cls.orm_execute_statement(
+laboratory_forms_app  |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+laboratory_forms_app  |     result = conn.execute(
+laboratory_forms_app  |              ^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+laboratory_forms_app  |     return meth(
+laboratory_forms_app  |            ^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+laboratory_forms_app  |     return connection._execute_clauseelement(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+laboratory_forms_app  |     ret = self._execute_context(
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+laboratory_forms_app  |     return self._exec_single_context(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+laboratory_forms_app  |     self._handle_dbapi_exception(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+laboratory_forms_app  |     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | sqlalchemy.exc.InternalError: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)
+laboratory_forms_app  | 2026-08-06 06:58:42,821 ERROR (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | psycopg2.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | 
+laboratory_forms_app  | The above exception was the direct cause of the following exception:
+laboratory_forms_app  | 
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 870, in full_dispatch_request
+laboratory_forms_app  |     rv = self.dispatch_request()
+laboratory_forms_app  |          ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 855, in dispatch_request
+laboratory_forms_app  |     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/app/routes/main.py", line 20, in index
+laboratory_forms_app  |     if current_user.is_authenticated:
+laboratory_forms_app  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 318, in __get__
+laboratory_forms_app  |     obj = instance._get_current_object()
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 526, in _get_current_object
+laboratory_forms_app  |     return get_name(local())
+laboratory_forms_app  |                     ^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 25, in <lambda>
+laboratory_forms_app  |     current_user = LocalProxy(lambda: _get_user())
+laboratory_forms_app  |                                       ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 370, in _get_user
+laboratory_forms_app  |     current_app.login_manager._load_user()
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/login_manager.py", line 364, in _load_user
+laboratory_forms_app  |     user = self._user_callback(user_id)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/app/app.py", line 118, in load_user
+laboratory_forms_app  |     return User.query.get(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "<string>", line 2, in get
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/deprecations.py", line 386, in warned
+laboratory_forms_app  |     return fn(*args, **kwargs)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1127, in get
+laboratory_forms_app  |     return self._get_impl(ident, loading.load_on_pk_identity)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1136, in _get_impl
+laboratory_forms_app  |     return self.session._get_impl(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3881, in _get_impl
+laboratory_forms_app  |     return db_load_fn(
+laboratory_forms_app  |            ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 695, in load_on_pk_identity
+laboratory_forms_app  |     session.execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2373, in execute
+laboratory_forms_app  |     return self._execute_internal(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2271, in _execute_internal
+laboratory_forms_app  |     result: Result[Any] = compile_state_cls.orm_execute_statement(
+laboratory_forms_app  |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+laboratory_forms_app  |     result = conn.execute(
+laboratory_forms_app  |              ^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+laboratory_forms_app  |     return meth(
+laboratory_forms_app  |            ^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+laboratory_forms_app  |     return connection._execute_clauseelement(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+laboratory_forms_app  |     ret = self._execute_context(
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+laboratory_forms_app  |     return self._exec_single_context(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+laboratory_forms_app  |     self._handle_dbapi_exception(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+laboratory_forms_app  |     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | sqlalchemy.exc.InternalError: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)
+laboratory_forms_app  | 2026-08-06 06:58:42,965 ERROR (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | psycopg2.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | 
+laboratory_forms_app  | The above exception was the direct cause of the following exception:
+laboratory_forms_app  | 
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 870, in full_dispatch_request
+laboratory_forms_app  |     rv = self.dispatch_request()
+laboratory_forms_app  |          ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 855, in dispatch_request
+laboratory_forms_app  |     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/app/routes/main.py", line 20, in index
+laboratory_forms_app  |     if current_user.is_authenticated:
+laboratory_forms_app  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 318, in __get__
+laboratory_forms_app  |     obj = instance._get_current_object()
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 526, in _get_current_object
+laboratory_forms_app  |     return get_name(local())
+laboratory_forms_app  |                     ^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 25, in <lambda>
+laboratory_forms_app  |     current_user = LocalProxy(lambda: _get_user())
+laboratory_forms_app  |                                       ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 370, in _get_user
+laboratory_forms_app  |     current_app.login_manager._load_user()
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/login_manager.py", line 364, in _load_user
+laboratory_forms_app  |     user = self._user_callback(user_id)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/app/app.py", line 118, in load_user
+laboratory_forms_app  |     return User.query.get(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "<string>", line 2, in get
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/deprecations.py", line 386, in warned
+laboratory_forms_app  |     return fn(*args, **kwargs)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1127, in get
+laboratory_forms_app  |     return self._get_impl(ident, loading.load_on_pk_identity)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1136, in _get_impl
+laboratory_forms_app  |     return self.session._get_impl(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3881, in _get_impl
+laboratory_forms_app  |     return db_load_fn(
+laboratory_forms_app  |            ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 695, in load_on_pk_identity
+laboratory_forms_app  |     session.execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2373, in execute
+laboratory_forms_app  |     return self._execute_internal(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2271, in _execute_internal
+laboratory_forms_app  |     result: Result[Any] = compile_state_cls.orm_execute_statement(
+laboratory_forms_app  |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+laboratory_forms_app  |     result = conn.execute(
+laboratory_forms_app  |              ^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+laboratory_forms_app  |     return meth(
+laboratory_forms_app  |            ^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+laboratory_forms_app  |     return connection._execute_clauseelement(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+laboratory_forms_app  |     ret = self._execute_context(
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+laboratory_forms_app  |     return self._exec_single_context(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+laboratory_forms_app  |     self._handle_dbapi_exception(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+laboratory_forms_app  |     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | sqlalchemy.exc.InternalError: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)
+laboratory_forms_app  | 2026-08-06 06:58:43,139 ERROR (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | psycopg2.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | 
+laboratory_forms_app  | The above exception was the direct cause of the following exception:
+laboratory_forms_app  | 
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 870, in full_dispatch_request
+laboratory_forms_app  |     rv = self.dispatch_request()
+laboratory_forms_app  |          ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 855, in dispatch_request
+laboratory_forms_app  |     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/app/routes/main.py", line 20, in index
+laboratory_forms_app  |     if current_user.is_authenticated:
+laboratory_forms_app  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 318, in __get__
+laboratory_forms_app  |     obj = instance._get_current_object()
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 526, in _get_current_object
+laboratory_forms_app  |     return get_name(local())
+laboratory_forms_app  |                     ^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 25, in <lambda>
+laboratory_forms_app  |     current_user = LocalProxy(lambda: _get_user())
+laboratory_forms_app  |                                       ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 370, in _get_user
+laboratory_forms_app  |     current_app.login_manager._load_user()
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/login_manager.py", line 364, in _load_user
+laboratory_forms_app  |     user = self._user_callback(user_id)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/app/app.py", line 118, in load_user
+laboratory_forms_app  |     return User.query.get(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "<string>", line 2, in get
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/deprecations.py", line 386, in warned
+laboratory_forms_app  |     return fn(*args, **kwargs)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1127, in get
+laboratory_forms_app  |     return self._get_impl(ident, loading.load_on_pk_identity)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1136, in _get_impl
+laboratory_forms_app  |     return self.session._get_impl(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3881, in _get_impl
+laboratory_forms_app  |     return db_load_fn(
+laboratory_forms_app  |            ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 695, in load_on_pk_identity
+laboratory_forms_app  |     session.execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2373, in execute
+laboratory_forms_app  |     return self._execute_internal(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2271, in _execute_internal
+laboratory_forms_app  |     result: Result[Any] = compile_state_cls.orm_execute_statement(
+laboratory_forms_app  |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+laboratory_forms_app  |     result = conn.execute(
+laboratory_forms_app  |              ^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+laboratory_forms_app  |     return meth(
+laboratory_forms_app  |            ^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+laboratory_forms_app  |     return connection._execute_clauseelement(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+laboratory_forms_app  |     ret = self._execute_context(
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+laboratory_forms_app  |     return self._exec_single_context(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+laboratory_forms_app  |     self._handle_dbapi_exception(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+laboratory_forms_app  |     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | sqlalchemy.exc.InternalError: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)
+laboratory_forms_app  | 2026-08-06 06:58:43,266 ERROR (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | psycopg2.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | 
+laboratory_forms_app  | The above exception was the direct cause of the following exception:
+laboratory_forms_app  | 
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 870, in full_dispatch_request
+laboratory_forms_app  |     rv = self.dispatch_request()
+laboratory_forms_app  |          ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 855, in dispatch_request
+laboratory_forms_app  |     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/app/routes/main.py", line 20, in index
+laboratory_forms_app  |     if current_user.is_authenticated:
+laboratory_forms_app  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 318, in __get__
+laboratory_forms_app  |     obj = instance._get_current_object()
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 526, in _get_current_object
+laboratory_forms_app  |     return get_name(local())
+laboratory_forms_app  |                     ^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 25, in <lambda>
+laboratory_forms_app  |     current_user = LocalProxy(lambda: _get_user())
+laboratory_forms_app  |                                       ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 370, in _get_user
+laboratory_forms_app  |     current_app.login_manager._load_user()
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/login_manager.py", line 364, in _load_user
+laboratory_forms_app  |     user = self._user_callback(user_id)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/app/app.py", line 118, in load_user
+laboratory_forms_app  |     return User.query.get(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "<string>", line 2, in get
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/deprecations.py", line 386, in warned
+laboratory_forms_app  |     return fn(*args, **kwargs)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1127, in get
+laboratory_forms_app  |     return self._get_impl(ident, loading.load_on_pk_identity)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1136, in _get_impl
+laboratory_forms_app  |     return self.session._get_impl(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3881, in _get_impl
+laboratory_forms_app  |     return db_load_fn(
+laboratory_forms_app  |            ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 695, in load_on_pk_identity
+laboratory_forms_app  |     session.execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2373, in execute
+laboratory_forms_app  |     return self._execute_internal(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2271, in _execute_internal
+laboratory_forms_app  |     result: Result[Any] = compile_state_cls.orm_execute_statement(
+laboratory_forms_app  |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+laboratory_forms_app  |     result = conn.execute(
+laboratory_forms_app  |              ^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+laboratory_forms_app  |     return meth(
+laboratory_forms_app  |            ^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+laboratory_forms_app  |     return connection._execute_clauseelement(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+laboratory_forms_app  |     ret = self._execute_context(
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+laboratory_forms_app  |     return self._exec_single_context(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+laboratory_forms_app  |     self._handle_dbapi_exception(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+laboratory_forms_app  |     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | sqlalchemy.exc.InternalError: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)
+laboratory_forms_app  | 2026-08-06 06:58:43,433 ERROR (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | psycopg2.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | 
+laboratory_forms_app  | The above exception was the direct cause of the following exception:
+laboratory_forms_app  | 
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 870, in full_dispatch_request
+laboratory_forms_app  |     rv = self.dispatch_request()
+laboratory_forms_app  |          ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 855, in dispatch_request
+laboratory_forms_app  |     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/app/routes/main.py", line 20, in index
+laboratory_forms_app  |     if current_user.is_authenticated:
+laboratory_forms_app  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 318, in __get__
+laboratory_forms_app  |     obj = instance._get_current_object()
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 526, in _get_current_object
+laboratory_forms_app  |     return get_name(local())
+laboratory_forms_app  |                     ^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 25, in <lambda>
+laboratory_forms_app  |     current_user = LocalProxy(lambda: _get_user())
+laboratory_forms_app  |                                       ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 370, in _get_user
+laboratory_forms_app  |     current_app.login_manager._load_user()
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/login_manager.py", line 364, in _load_user
+laboratory_forms_app  |     user = self._user_callback(user_id)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/app/app.py", line 118, in load_user
+laboratory_forms_app  |     return User.query.get(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "<string>", line 2, in get
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/deprecations.py", line 386, in warned
+laboratory_forms_app  |     return fn(*args, **kwargs)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1127, in get
+laboratory_forms_app  |     return self._get_impl(ident, loading.load_on_pk_identity)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1136, in _get_impl
+laboratory_forms_app  |     return self.session._get_impl(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3881, in _get_impl
+laboratory_forms_app  |     return db_load_fn(
+laboratory_forms_app  |            ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 695, in load_on_pk_identity
+laboratory_forms_app  |     session.execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2373, in execute
+laboratory_forms_app  |     return self._execute_internal(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2271, in _execute_internal
+laboratory_forms_app  |     result: Result[Any] = compile_state_cls.orm_execute_statement(
+laboratory_forms_app  |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+laboratory_forms_app  |     result = conn.execute(
+laboratory_forms_app  |              ^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+laboratory_forms_app  |     return meth(
+laboratory_forms_app  |            ^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+laboratory_forms_app  |     return connection._execute_clauseelement(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+laboratory_forms_app  |     ret = self._execute_context(
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+laboratory_forms_app  |     return self._exec_single_context(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+laboratory_forms_app  |     self._handle_dbapi_exception(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+laboratory_forms_app  |     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | sqlalchemy.exc.InternalError: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)
+laboratory_forms_app  | 2026-08-06 07:00:42,781 ERROR (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | psycopg2.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | 
+laboratory_forms_app  | The above exception was the direct cause of the following exception:
+laboratory_forms_app  | 
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 870, in full_dispatch_request
+laboratory_forms_app  |     rv = self.dispatch_request()
+laboratory_forms_app  |          ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 855, in dispatch_request
+laboratory_forms_app  |     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/app/routes/main.py", line 20, in index
+laboratory_forms_app  |     if current_user.is_authenticated:
+laboratory_forms_app  |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 318, in __get__
+laboratory_forms_app  |     obj = instance._get_current_object()
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 526, in _get_current_object
+laboratory_forms_app  |     return get_name(local())
+laboratory_forms_app  |                     ^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 25, in <lambda>
+laboratory_forms_app  |     current_user = LocalProxy(lambda: _get_user())
+laboratory_forms_app  |                                       ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 370, in _get_user
+laboratory_forms_app  |     current_app.login_manager._load_user()
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/login_manager.py", line 364, in _load_user
+laboratory_forms_app  |     user = self._user_callback(user_id)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/app/app.py", line 118, in load_user
+laboratory_forms_app  |     return User.query.get(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "<string>", line 2, in get
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/deprecations.py", line 386, in warned
+laboratory_forms_app  |     return fn(*args, **kwargs)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1127, in get
+laboratory_forms_app  |     return self._get_impl(ident, loading.load_on_pk_identity)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1136, in _get_impl
+laboratory_forms_app  |     return self.session._get_impl(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3881, in _get_impl
+laboratory_forms_app  |     return db_load_fn(
+laboratory_forms_app  |            ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 695, in load_on_pk_identity
+laboratory_forms_app  |     session.execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2373, in execute
+laboratory_forms_app  |     return self._execute_internal(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2271, in _execute_internal
+laboratory_forms_app  |     result: Result[Any] = compile_state_cls.orm_execute_statement(
+laboratory_forms_app  |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+laboratory_forms_app  |     result = conn.execute(
+laboratory_forms_app  |              ^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+laboratory_forms_app  |     return meth(
+laboratory_forms_app  |            ^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+laboratory_forms_app  |     return connection._execute_clauseelement(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+laboratory_forms_app  |     ret = self._execute_context(
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+laboratory_forms_app  |     return self._exec_single_context(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+laboratory_forms_app  |     self._handle_dbapi_exception(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+laboratory_forms_app  |     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | sqlalchemy.exc.InternalError: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)
+laboratory_forms_app  | 2026-08-06 14:43:26,069 ERROR (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | psycopg2.errors.InFailedSqlTransaction: current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | 
+laboratory_forms_app  | The above exception was the direct cause of the following exception:
+laboratory_forms_app  | 
+laboratory_forms_app  | Traceback (most recent call last):
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 870, in full_dispatch_request
+laboratory_forms_app  |     rv = self.dispatch_request()
+laboratory_forms_app  |          ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask/app.py", line 855, in dispatch_request
+laboratory_forms_app  |     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 284, in decorated_view
+laboratory_forms_app  |     elif not current_user.is_authenticated:
+laboratory_forms_app  |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 318, in __get__
+laboratory_forms_app  |     obj = instance._get_current_object()
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/werkzeug/local.py", line 526, in _get_current_object
+laboratory_forms_app  |     return get_name(local())
+laboratory_forms_app  |                     ^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 25, in <lambda>
+laboratory_forms_app  |     current_user = LocalProxy(lambda: _get_user())
+laboratory_forms_app  |                                       ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/utils.py", line 370, in _get_user
+laboratory_forms_app  |     current_app.login_manager._load_user()
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/flask_login/login_manager.py", line 364, in _load_user
+laboratory_forms_app  |     user = self._user_callback(user_id)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/app/app.py", line 118, in load_user
+laboratory_forms_app  |     return User.query.get(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "<string>", line 2, in get
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/deprecations.py", line 386, in warned
+laboratory_forms_app  |     return fn(*args, **kwargs)  # type: ignore[no-any-return]
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1127, in get
+laboratory_forms_app  |     return self._get_impl(ident, loading.load_on_pk_identity)
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 1136, in _get_impl
+laboratory_forms_app  |     return self.session._get_impl(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3881, in _get_impl
+laboratory_forms_app  |     return db_load_fn(
+laboratory_forms_app  |            ^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 695, in load_on_pk_identity
+laboratory_forms_app  |     session.execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2373, in execute
+laboratory_forms_app  |     return self._execute_internal(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2271, in _execute_internal
+laboratory_forms_app  |     result: Result[Any] = compile_state_cls.orm_execute_statement(
+laboratory_forms_app  |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+laboratory_forms_app  |     result = conn.execute(
+laboratory_forms_app  |              ^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1421, in execute
+laboratory_forms_app  |     return meth(
+laboratory_forms_app  |            ^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 526, in _execute_on_connection
+laboratory_forms_app  |     return connection._execute_clauseelement(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1643, in _execute_clauseelement
+laboratory_forms_app  |     ret = self._execute_context(
+laboratory_forms_app  |           ^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1848, in _execute_context
+laboratory_forms_app  |     return self._exec_single_context(
+laboratory_forms_app  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1988, in _exec_single_context
+laboratory_forms_app  |     self._handle_dbapi_exception(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2365, in _handle_dbapi_exception
+laboratory_forms_app  |     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1969, in _exec_single_context
+laboratory_forms_app  |     self.dialect.do_execute(
+laboratory_forms_app  |   File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+laboratory_forms_app  |     cursor.execute(statement, parameters)
+laboratory_forms_app  | sqlalchemy.exc.InternalError: (psycopg2.errors.InFailedSqlTransaction) current transaction is aborted, commands ignored until end of transaction block
+laboratory_forms_app  | 
+laboratory_forms_app  | [SQL: SELECT users.id AS users_id, users.name AS users_name, users.email AS users_email, users.password_hash AS users_password_hash, users.role AS users_role, users.active AS users_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+laboratory_forms_app  | FROM users 
+laboratory_forms_app  | WHERE users.id = %(pk_1)s]
+laboratory_forms_app  | [parameters: {'pk_1': 1}]
+laboratory_forms_app  | (Background on this error at: https://sqlalche.me/e/20/2j85)

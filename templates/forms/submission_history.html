@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}
+Submission History
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h4>Submission History</h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-striped">
+
+            <thead>
+
+            <tr>
+
+                <th>Reference</th>
+
+                <th>Sample Number</th>
+
+                <th>Status</th>
+
+                <th>Date</th>
+
+                <th></th>
+
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for submission in submissions %}
+
+            <tr>
+
+                <td>
+
+                    {{ submission.order_reference }}
+
+                </td>
+
+                <td>
+
+                    {{ submission.sample_number }}
+
+                </td>
+
+                <td>
+
+                    {{ submission.status }}
+
+                </td>
+
+                <td>
+
+                    {{ submission.submitted_at }}
+
+                </td>
+
+                <td>
+
+                     <a href="{{ url_for('submissions.detailmission.id) }}">
+
+                        View
+
+                    </a>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

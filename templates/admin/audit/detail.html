@@ -1,0 +1,105 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Audit Log Detail
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3>
+            Audit Log #{{ log.id }}
+        </h3>
+        {{ url_for('audit.index') }}
+            Back
+        </a>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            Audit Information
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tr>
+                    <th width="25%">
+                        ID
+                    </th>
+                    <td>
+                        {{ log.id }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Action
+                    </th>
+                    <td>
+                        <span class="badge bg-primary">
+                            {{ log.action }}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        User ID
+                    </th>
+                    <td>
+                        {{ log.user_id or "-" }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Object Type
+                    </th>
+                    <td>
+                        {{ log.object_type or "-" }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Object ID
+                    </th>
+                    <td>
+                        {{ log.object_id or "-" }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        IP Address
+                    </th>
+                    <td>
+                        {{ log.ip_address or "-" }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Request ID
+                    </th>
+                    <td>
+                        {{ log.request_id or "-" }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Created At
+                    </th>
+                    <td>
+                        {{ log.created_at }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="card mt-4">
+        <div class="card-header">
+            Details
+        </div>
+        <div class="card-body">
+            {% if log.details %}
+            <pre class="mb-0">{{ log.details }}</pre>
+            {% else %}
+            <div class="text-muted">
+                No additional details available.
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

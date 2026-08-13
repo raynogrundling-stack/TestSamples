@@ -1,0 +1,101 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Administration Dashboard
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <h2 class="mb-4">
+        Administration Dashboard
+    </h2>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5>Users</h5>
+                    <h2>
+                        {{ stats.users }}
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5>Customers</h5>
+                    <h2>
+                        {{ stats.customers }}
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-dark bg-warning mb-3">
+                <div class="card-body">
+                    <h5>Submissions</h5>
+                    <h2>
+                        {{ stats.submissions }}
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-body">
+                    <h5>Failed Emails</h5>
+                    <h2>
+                        {{ stats.failed_emails }}
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Quick Links
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a href="{{ url_for('users.index') }}"
+                         class="btn btn-outline-primary">
+                            Users
+                        </a>
+                        <a href="{{ url_for('customers.index') }}"
+                          class="btn btn-outline-primary">
+                            Customers
+                        </a>
+                        <a href="{{ url_for('submissions.index') }}"
+                         class="btn btn-outline-primary">
+                            Submissions
+                        </a>
+                        <a href="{{ url_for('settings.index') }}"
+                         class="btn btn-outline-primary">
+                            Settings
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    System Status
+                </div>
+                <div class="card-body">
+                    {% if system_healthy %}
+                        <span class="badge bg-success">
+                            Operational
+                        </span>
+                    {% else %}
+                        <span class="badge bg-danger">
+                            Attention Required
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

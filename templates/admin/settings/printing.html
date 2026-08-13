@@ -1,0 +1,56 @@
+{% extends "admin/base.html" %}
+
+{% block title %}
+Printing Settings
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <h3 class="mb-4">
+        Printing Settings
+    </h3>
+    <div class="card">
+        <div class="card-body">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="form-check mb-3">
+                    {{ form.auto_print_on_submit(
+                        class="form-check-input"
+                    ) }}
+                    {{ form.auto_print_on_submit.label(
+                        class="form-check-label"
+                    ) }}
+                </div>
+                <div class="form-text mb-4">
+                    Automatically trigger printing when a submission is completed.
+                </div>
+                <div class="form-check mb-3">
+                    {{ form.enable_browser_printing(
+                        class="form-check-input"
+                    ) }}
+                    {{ form.enable_browser_printing.label(
+                        class="form-check-label"
+                    ) }}
+                </div>
+                <div class="form-text mb-4">
+                    Allow users to print directly from the browser interface.
+                </div>
+                <hr>
+                <div class="alert alert-info">
+                    <strong>Note:</strong>
+                    Browser printing depends on local workstation and browser configuration.
+                    Automatic printing should only be enabled in controlled environments.
+                </div>
+                <div class="mt-4">
+                    {{ form.submit(
+                        class="btn btn-success"
+                    ) }}
+                     <a href="{{ url_for('settings.index') }}"
+                       class="btn btn-secondary">
+                        Back to Settings
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

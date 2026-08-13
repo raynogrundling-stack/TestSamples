@@ -1,0 +1,14 @@
+Submission Completed
+
+Reference:
+{{ submission.order_reference }}
+
+Sample Number:
+{{ submission.sample_number }}
+
+Customer:
+{{ submission.customer_name }}
+
+The submission has been processed successfully.
+
+Please see attached results.

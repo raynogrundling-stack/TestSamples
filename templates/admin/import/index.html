@@ -1,0 +1,69 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Data Import
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <h3 class="mb-4">
+        Data Import
+    </h3>
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Customers</h5>
+                    <p>
+                        Import customer records.
+                    </p>
+                    <a href="{{ url_for('imports.customers') }}"
+                      class="btn btn-primary">
+                        Import Customers
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Dropdowns</h5>
+                    <p>
+                        Import dropdown options.
+                    </p>
+                    <a href="{{ url_for('imports.dropdowns') }}"
+                      class="btn btn-primary">
+                        Import Dropdowns
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Settings</h5>
+                    <p>
+                        Import system settings.
+                    </p>
+                    <a href="{{ url_for('imports.settings') }}"
+                      class="btn btn-primary">
+                        Import Settings
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Backup ZIP</h5>
+                    <p>
+                        Restore data from backup.
+                    </p>
+                    <a href="{{ url_for('imports.backup_zip') }}"
+                      class="btn btn-primary">
+                        Import Backup
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

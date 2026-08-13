@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}
+Submission Timeline
+{% endblock %}
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h4>
+            Submission Timeline
+        </h4>
+    </div>
+    <div class="card-body">
+        <ul class="list-group">
+            {% for log in logs %}
+            <li class="list-group-item">
+                <strong>
+                    {{ log.action }}
+                </strong>
+                <br>
+                {{ log.created_at }}
+                {% if log.details %}
+                <br>
+                <small>
+                    {{ log.details }}
+                </small>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

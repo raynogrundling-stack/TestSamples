@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}
+Submission Detail
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+    <div class="card-header">
+
+        <h4>
+
+            Submission
+
+            {{ submission.sample_number }}
+
+        </h4>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table">
+
+            <tr>
+                <th>Reference</th>
+                <td>{{ submission.order_reference }}</td>
+            </tr>
+
+            <tr>
+                <th>Sample Number</th>
+                <td>{{ submission.sample_number }}</td>
+            </tr>
+
+            <tr>
+                <th>Customer</th>
+                <td>{{ submission.customer_name }}</td>
+            </tr>
+
+            <tr>
+                <th>Status</th>
+                <td>{{ submission.status }}</td>
+            </tr>
+
+            <tr>
+                <th>Submitted</th>
+                <td>{{ submission.submitted_at }}</td>
+            </tr>
+
+        </table>
+
+        <div class="row mt-3">
+
+            <div class="col-md-4">
+
+                {% if submission.barcode_file %}
+
+                {{ url_for('submissions.barcode', id=submission.id) }}
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <hr>
+
+         }}"
+            class="btn btn-primary">
+
+            PDF
+
+        </a>
+
+         }}"
+            class="btn btn-success">
+
+            CSV
+
+        </a>
+
+         }}"
+            class="btn btn-warning">
+
+            Reprint
+
+        </a>
+
+         }}"
+            style="display:inline;">
+
+            <button
+                type="submit"
+                class="btn btn-info">
+
+                Resend Results
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

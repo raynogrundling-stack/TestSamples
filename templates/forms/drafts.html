@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}
+Draft Submissions
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+
+    <div class="card-header">
+        <h4>Draft Submissions</h4>
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-striped">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Customer</th>
+                    <th>Created</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            {% for draft in drafts %}
+
+                <tr>
+
+                    <td>{{ draft.id }}</td>
+
+                    <td>{{ draft.customer_name }}</td>
+
+                    <td>{{ draft.created_at }}</td>
+
+                    <td>
+
+                        {{ url_for('submissions.edit',
+                            submission_id=draft.id) }}
+
+                            Continue
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Uptime
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <h3 class="mb-4">
+        Service Uptime
+    </h3>
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-bordered">
+                {% for item in uptime %}
+                <tr>
+                    <th width="30%">
+                        {{ item.service }}
+                    </th>
+                    <td>
+                        {{ item.uptime }}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="2"
+                        class="text-center">
+                        No uptime information available.
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "admin/base.html" %}
+{% block title %}
+Data Export
+{% endblock %}
+{% block admin_content %}
+<div class="container-fluid">
+    <h3 class="mb-4">
+        Data Export
+    </h3>
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Customers</h5>
+                    <p>
+                       Export all customers.
+                    </p>
+                    <a href="{{ url_for('exports.customers') }}"
+                      class="btn btn-primary">
+                        Export Customers
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Users</h5>
+                    <p>
+                        Export all users.
+                    </p>
+                    <a href="{{ url_for('exports.users') }}"
+                      class="btn btn-primary">
+                        Export Users
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Dropdowns</h5>
+                    <p>
+                        Export dropdown data.
+                    </p>
+                    <a href="{{ url_for('exports.dropdowns') }}"
+                      class="btn btn-primary">
+                        Export Dropdowns
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5>Audit Logs</h5>
+                    <p>
+                        Export audit history.
+                    </p>
+                    <a href="{{ url_for('exports.audit_logs') }}"
+                      class="btn btn-primary">
+                        Export Audit Logs
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5>System Export</h5>
+                    <p>
+                        Export complete system data.
+                    </p>
+                    <a href="{{ url_for('exports.system_export') }}"
+                      class="btn btn-primary">
+                        Export System Data
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
