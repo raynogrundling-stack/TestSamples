@@ -2,44 +2,135 @@ from flask_wtf import FlaskForm
 
 from wtforms import (
     StringField,
+    PasswordField,
     SelectField,
     BooleanField,
-    SubmitField,
-    PasswordField
+    SubmitField
 )
 
 from wtforms.validators import (
     DataRequired,
     Email,
-    Optional,
-    EqualTo
+    Length,
+    Optional
 )
 
 
 class UserCreateForm(FlaskForm):
 
     name = StringField(
-        "Name",
+        "First Name",
         validators=[
-            DataRequired()
+            DataRequired(),
+            Length(max=255)
+        ]
+    )
+
+    surname = StringField(
+        "Surname",
+        validators=[
+            Optional(),
+            Length(max=255)
+        ]
+    )
+
+    contact_number = StringField(
+        "Contact Number",
+        validators=[
+            Optional(),
+            Length(max=50)
         ]
     )
 
     email = StringField(
-        "Email",
+        "Email Address",
         validators=[
             DataRequired(),
-            Email()
+            Email(),
+            Length(max=255)
+        ]
+    )
+
+    password = PasswordField(
+        "Password",
+        validators=[
+            Optional(),
+            Length(min=8, max=255)
         ]
     )
 
     role = SelectField(
         "Role",
         choices=[
-            ("admin", "Admin"),
-            ("manager", "Manager"),
             ("user", "User"),
-            ("auditor", "Auditor")
+            ("admin", "Administrator")
+        ],
+        validators=[
+            DataRequired()
+        ]
+    )
+
+    active = BooleanField(
+        "Active",
+        default=True
+    )
+
+    submit = SubmitField(
+        "Create User"
+    )
+
+
+class UserEditForm(FlaskForm):
+
+    name = StringField(
+        "First Name",
+        validators=[
+            DataRequired(),
+            Length(max=255)
+        ]
+    )
+
+    surname = StringField(
+        "Surname",
+        validators=[
+            Optional(),
+            Length(max=255)
+        ]
+    )
+
+    contact_number = StringField(
+        "Contact Number",
+        validators=[
+            Optional(),
+            Length(max=50)
+        ]
+    )
+
+    email = StringField(
+        "Email Address",
+        validators=[
+            DataRequired(),
+            Email(),
+            Length(max=255)
+        ]
+    )
+
+    password = PasswordField(
+        "New Password",
+        validators=[
+            Optional(),
+            Length(min=8, max=255)
+        ]
+    )
+
+    role = SelectField(
+        "Role",
+        choices=[
+            ("user", "User"),
+            ("admin", "Administrator")
+        ],
+        validators=[
+            DataRequired()
         ]
     )
 
@@ -47,28 +138,6 @@ class UserCreateForm(FlaskForm):
         "Active"
     )
 
-    password = PasswordField(
-        "Password",
-        validators=[
-            Optional()
-        ]
-    )
-
-    confirm_password = PasswordField(
-        "Confirm Password",
-        validators=[
-            Optional(),
-            EqualTo(
-                "password",
-                message="Passwords must match."
-            )
-        ]
-    )
-
     submit = SubmitField(
-        "Save"
+        "Update User"
     )
-
-
-class UserEditForm(UserCreateForm):
-    pass
