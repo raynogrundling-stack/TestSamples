@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "name": "admin",
+        "email": "support@itdirect.co.za",
+        "role": "admin",
+        "active": true
+    },
+    {
+        "id": 2,
+        "name": "test_normal",
+        "email": "rayno@itdirect.co.za",
+        "role": "user",
+        "active": true
+    }
+]

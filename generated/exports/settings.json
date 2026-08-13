@@ -1,0 +1,7 @@
+{
+    "company_name": "ITDirectTest",
+    "smtp_server": "",
+    "smtp_port": 587,
+    "smtp_sender_name": "",
+    "smtp_sender_address": ""
+}
