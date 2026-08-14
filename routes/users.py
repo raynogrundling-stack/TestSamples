@@ -318,4 +318,8 @@ def delete(id):
         "success"
     )
 
-    return redirect
+    return redirect(
+        url_for(
+            "users.index"
+        )
+    )
