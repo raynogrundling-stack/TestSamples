@@ -30,3 +30,6 @@ class SystemSettings(db.Model):
     submission_email = db.Column(
         db.String(255)
     )
+    submission_email = db.Column(
+        db.String(255)
+    )
