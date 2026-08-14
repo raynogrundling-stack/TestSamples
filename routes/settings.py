@@ -91,9 +91,13 @@ def company():
         obj=settings
     )
     if form.validate_on_submit():
-        settings.company_name = (
-            form.company_name.data
-        )
+    settings.company_name = (
+        form.company_name.data
+    )
+
+    settings.submission_email = (
+        form.submission_email.data
+    )
         logo = request.files.get(
             "company_logo"
         )
