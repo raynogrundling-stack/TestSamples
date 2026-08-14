@@ -9,9 +9,7 @@ New Submission
 <div class="card">
 
     <div class="card-header">
-
         <h4>Create Submission</h4>
-
     </div>
 
     <div class="card-body">
@@ -20,30 +18,226 @@ New Submission
 
             {{ form.hidden_tag() }}
 
-            <div class="row">
+            <!-- Contact Person -->
 
-                <div class="col-md-6">
+            <div class="card mb-4">
 
-                    <div class="mb-3">
+                <div class="card-header">
+                    Contact Person
+                </div>
 
-                        {{ form.customer_id.label }}
+                <div class="card-body">
 
-                        {{ form.customer_id(
-                            class="form-select"
-                        ) }}
+                    <div class="row">
+
+                        <div class="col-md-3">
+
+                            <div class="mb-3">
+
+                                {{ form.contact_name.label(
+                                    class="form-label"
+                                ) }}
+
+                                {{ form.contact_name(
+                                    class="form-control"
+                                ) }}
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <div class="mb-3">
+
+                                {{ form.contact_surname.label(
+                                    class="form-label"
+                                ) }}
+
+                                {{ form.contact_surname(
+                                    class="form-control"
+                                ) }}
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <div class="mb-3">
+
+                                {{ form.contact_phone.label(
+                                    class="form-label"
+                                ) }}
+
+                                {{ form.contact_phone(
+                                    class="form-control"
+                                ) }}
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <div class="mb-3">
+
+                                {{ form.contact_email.label(
+                                    class="form-label"
+                                ) }}
+
+                                {{ form.contact_email(
+                                    class="form-control"
+                                ) }}
+
+                            </div>
+
+                        </div>
 
                     </div>
 
                 </div>
 
-                <div class="col-md-6">
+            </div>
+
+            <!-- Customer -->
+
+            <div class="card mb-4">
+
+                <div class="card-header">
+                    Customer Information
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+
+                            <div class="mb-3">
+
+                                {{ form.customer_id.label(
+                                    class="form-label"
+                                ) }}
+
+                                {{ form.customer_id(
+                                    class="form-select"
+                                ) }}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Sample -->
+
+            <div class="card mb-4">
+
+                <div class="card-header">
+                    Sample Information
+                </div>
+
+                <div class="card-body">
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <div class="mb-3">
+
+                                {{ form.sample_type.label(
+                                    class="form-label"
+                                ) }}
+
+                                {{ form.sample_type(
+                                    class="form-control"
+                                ) }}
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="mb-3">
+
+                                {{ form.order_reference.label(
+                                    class="form-label"
+                                ) }}
+
+                                {{ form.order_reference(
+                                    class="form-control"
+                                ) }}
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
                     <div class="mb-3">
 
-                        {{ form.sample_description.label }}
+                        {{ form.sample_description.label(
+                            class="form-label"
+                        ) }}
 
                         {{ form.sample_description(
-                            class="form-control"
+                            class="form-control",
+                            rows="4"
+                        ) }}
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <div class="mb-3">
+
+                                {{ form.test_required.label(
+                                    class="form-label"
+                                ) }}
+
+                                {{ form.test_required(
+                                    class="form-control"
+                                ) }}
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <div class="mb-3">
+
+                                {{ form.results_email.label(
+                                    class="form-label"
+                                ) }}
+
+                                {{ form.results_email(
+                                    class="form-control"
+                                ) }}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        {{ form.comments.label(
+                            class="form-label"
+                        ) }}
+
+                        {{ form.comments(
+                            class="form-control",
+                            rows="4"
                         ) }}
 
                     </div>
@@ -52,30 +246,142 @@ New Submission
 
             </div>
 
-            <div class="row">
+            <!-- Dynamic Dropdowns -->
 
-                <div class="col-md-6">
+            {% if dropdown_categories %}
 
-                    <div class="mb-3">
+            <div class="card mb-4">
 
-                        {{ form.order_reference.label }}
+                <div class="card-header">
+                    Additional Information
+                </div>
 
-                        {{ form.order_reference(
-                            class="form-control"
+                <div class="card-body">
+
+                    {% for category in dropdown_categories %}
+
+                    <div class="mb-4">
+
+                        <label class="form-label fw-bold">
+                            {{ category.name }}
+                        </label>
+
+                        {% if category.description %}
+
+                        <div class="text-muted mb-2">
+                            {{ category.description }}
+                        </div>
+
+                        {% endif %}
+
+                        {% if category.input_type == "dropdown" %}
+
+                        <select
+                            class="form-select"
+                            name="dropdown_{{ category.id }}">
+
+                            <option value="">
+                                Select an Option
+                            </option>
+
+                            {% for option in category.options %}
+
+                                {% if option.active and not option.deleted %}
+
+                                <option
+                                    value="{{ option.value }}">
+                                    {{ option.value }}
+                                </option>
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        </select>
+
+                        {% elif category.input_type == "checklist" %}
+
+                            {% for option in category.options %}
+
+                                {% if option.active and not option.deleted %}
+
+                                <div class="form-check">
+
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        name="dropdown_{{ category.id }}"
+                                        value="{{ option.value }}"
+                                        id="option_{{ option.id }}">
+
+                                    <label
+                                        class="form-check-label"
+                                        for="option_{{ option.id }}">
+
+                                        {{ option.value }}
+
+                                    </label>
+
+                                </div>
+
+                                {% endif %}
+
+                            {% endfor %}
+
+                        {% endif %}
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+            <!-- Output -->
+
+            <div class="card mb-4">
+
+                <div class="card-header">
+                    Output Options
+                </div>
+
+                <div class="card-body">
+
+                    <div class="form-check mb-2">
+
+                        {{ form.generate_pdf(
+                            class="form-check-input"
+                        ) }}
+
+                        {{ form.generate_pdf.label(
+                            class="form-check-label"
                         ) }}
 
                     </div>
 
-                </div>
+                    <div class="form-check mb-2">
 
-                <div class="col-md-6">
+                        {{ form.generate_csv(
+                            class="form-check-input"
+                        ) }}
 
-                    <div class="mb-3">
+                        {{ form.generate_csv.label(
+                            class="form-check-label"
+                        ) }}
 
-                        {{ form.results_email.label }}
+                    </div>
 
-                        {{ form.results_email(
-                            class="form-control"
+                    <div class="form-check">
+
+                        {{ form.send_email(
+                            class="form-check-input"
+                        ) }}
+
+                        {{ form.send_email.label(
+                            class="form-check-label"
                         ) }}
 
                     </div>
@@ -86,13 +392,9 @@ New Submission
 
             <div class="mt-3">
 
-                <button
-                    type="submit"
-                    class="btn btn-success">
-
-                    Submit
-
-                </button>
+                {{ form.submit(
+                    class="btn btn-success"
+                ) }}
 
                 <button
                     type="button"
@@ -133,7 +435,6 @@ document.getElementById(
         alert(
             "Draft saved."
         );
-
     }
 );
 
