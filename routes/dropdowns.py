@@ -181,6 +181,12 @@ def category(id):
         )
         .all()
     )
+        .order_by(
+            DropdownOption.sort_order,
+            DropdownOption.value
+        )
+        .all()
+    )
 
     return render_template(
         "admin/dropdowns/category.html",
