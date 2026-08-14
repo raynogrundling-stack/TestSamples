@@ -97,9 +97,34 @@ def history():
 
     return render_template(
         "forms/submission_history.html",
-        submissions=submissions
+        drafts=submissions
+    )
+@submissions_bp.route(
+    "/draft",
+    methods=["POST"]
+)
+@login_required
+def save_draft():
+
+    submission = Submission(
+
+        user_id=current_user.id,
+
+        status="Draft",
+
+        submitted_at=datetime.utcnow()
     )
 
+    db.session.add(
+        submission
+    )
+
+    db.session.commit()
+
+    return {
+        "success": True,
+        "draft_id": submission.id
+    }
 
 @submissions_bp.route(
     "/create",
