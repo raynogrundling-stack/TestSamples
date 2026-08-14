@@ -27,25 +27,7 @@ class Submission(db.Model):
         db.String(100),
         unique=True
     )
-    contact_name = db.Column(
-        db.String(255)
-    )
 
-    contact_surname = db.Column(
-        db.String(255)
-    )
-
-    contact_phone = db.Column(
-        db.String(100)
-    )
-
-    contact_email = db.Column(
-        db.String(255)
-    )
-
-    company_submission_email = db.Column(
-        db.String(255)
-    )
     sample_number = db.Column(
         db.String(100),
         unique=True
@@ -71,6 +53,34 @@ class Submission(db.Model):
         db.String(255)
     )
 
+    #
+    # Contact Person Details
+    #
+
+    contact_name = db.Column(
+        db.String(255)
+    )
+
+    contact_surname = db.Column(
+        db.String(255)
+    )
+
+    contact_phone = db.Column(
+        db.String(50)
+    )
+
+    contact_email = db.Column(
+        db.String(255)
+    )
+
+    #
+    # Company Submission Email
+    #
+
+    company_submission_email = db.Column(
+        db.String(255)
+    )
+
     status = db.Column(
         db.String(50),
         default="Draft"
@@ -80,6 +90,10 @@ class Submission(db.Model):
         db.DateTime,
         default=datetime.utcnow
     )
+
+    #
+    # Dynamic Dropdown and Checklist Data
+    #
 
     field_data = db.Column(
         db.JSON
@@ -112,6 +126,10 @@ class Submission(db.Model):
         onupdate=datetime.utcnow
     )
 
+    #
+    # Relationships
+    #
+
     user = db.relationship(
         "User",
         backref="submissions"
@@ -121,3 +139,9 @@ class Submission(db.Model):
         "Customer",
         backref="submissions"
     )
+
+    def __repr__(self):
+        return (
+            f"<Submission "
+            f"{self.sample_number}>"
+        )
