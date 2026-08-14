@@ -19,6 +19,11 @@ from extensions import db
 
 from models.submission import Submission
 from models.customer import Customer
+from models.settings import SystemSettings
+
+from models.dropdown_category import (
+    DropdownCategory
+)
 
 from forms.submission_forms import (
     SubmissionForm
@@ -52,16 +57,24 @@ submissions_bp = Blueprint(
 def dashboard():
 
     stats = {
-        "total": Submission.query.count(),
-        "completed": Submission.query.filter_by(
-            status="Completed"
-        ).count(),
-        "drafts": Submission.query.filter_by(
-            status="Draft"
-        ).count(),
-        "failed": Submission.query.filter_by(
-            status="Failed"
-        ).count()
+
+        "total":
+            Submission.query.count(),
+
+        "completed":
+            Submission.query.filter_by(
+                status="Completed"
+            ).count(),
+
+        "drafts":
+            Submission.query.filter_by(
+                status="Draft"
+            ).count(),
+
+        "failed":
+            Submission.query.filter_by(
+                status="Failed"
+            ).count()
     }
 
     return render_template(
@@ -97,9 +110,21 @@ def create():
 
     form = SubmissionForm()
 
-    customers = Customer.query.order_by(
-        Customer.customer_name
-    ).all()
+    settings = (
+        SystemSettings.query.first()
+    )
+
+    customers = (
+        Customer.query
+        .filter_by(
+            active=True,
+            deleted=False
+        )
+        .order_by(
+            Customer.customer_name
+        )
+        .all()
+    )
 
     form.customer_id.choices = [
         (
@@ -109,11 +134,117 @@ def create():
         for c in customers
     ]
 
+    #
+    # Auto Populate Contact Person
+    #
+
+    if request.method == "GET":
+
+        if hasattr(
+            form,
+            "contact_name"
+        ):
+            form.contact_name.data = (
+                current_user.name
+            )
+
+        if hasattr(
+            form,
+            "contact_surname"
+        ):
+            form.contact_surname.data = (
+                getattr(
+                    current_user,
+                    "surname",
+                    ""
+                )
+            )
+
+        if hasattr(
+            form,
+            "contact_phone"
+        ):
+            form.contact_phone.data = (
+                getattr(
+                    current_user,
+                    "contact_number",
+                    ""
+                )
+            )
+
+        if hasattr(
+            form,
+            "contact_email"
+        ):
+            form.contact_email.data = (
+                current_user.email
+            )
+
+    #
+    # Load Active Dropdown Categories
+    #
+
+    active_categories = (
+        DropdownCategory.query
+        .filter_by(
+            active=True,
+            deleted=False
+        )
+        .order_by(
+            DropdownCategory.name
+        )
+        .all()
+    )
+
     if form.validate_on_submit():
 
         customer = Customer.query.get(
             form.customer_id.data
         )
+
+        if not customer:
+
+            flash(
+                "Invalid customer selected.",
+                "danger"
+            )
+
+            return redirect(
+                url_for(
+                    "submissions.create"
+                )
+            )
+
+        #
+        # Build Dynamic Field Data
+        #
+
+        field_data = {}
+
+        for category in active_categories:
+
+            field_name = (
+                f"dropdown_{category.id}"
+            )
+
+            if (
+                category.input_type
+                == "checklist"
+            ):
+
+                field_data[
+                    category.name
+                ] = request.form.getlist(
+                    field_name
+                )
+
+            else:
+
+                field_data[
+                    category.name
+                ] = request.form.get(
+                    field_name
+                )
 
         order_reference = (
             ReferenceService
@@ -121,24 +252,101 @@ def create():
         )
 
         sample_number = (
-            ReferenceService.generate_sample_number(
+            ReferenceService
+            .generate_sample_number(
                 customer.customer_code
             )
         )
 
         submission = Submission(
+
             user_id=current_user.id,
+
             customer_id=customer.id,
-            customer_name=customer.customer.name,
-            order_reference=order_reference,
-            sample_number=sample_number,
-            sample_description=form.sample_description.data,
-            sample_type=form.sample_type.data,
-            test_required=form.test_required.data,
-            results_email=form.results_email.data,
-            comments=form.comments.data,
+
+            customer_name=
+                customer.customer_name,
+
+            order_reference=
+                order_reference,
+
+            sample_number=
+                sample_number,
+
+            sample_description=
+                form.sample_description.data,
+
+            sample_type=
+                form.sample_type.data,
+
+            test_required=
+                form.test_required.data,
+
+            results_email=
+                form.results_email.data,
+
+            contact_name=
+                getattr(
+                    form,
+                    "contact_name",
+                    None
+                ).data
+                if hasattr(
+                    form,
+                    "contact_name"
+                )
+                else current_user.name,
+
+            contact_surname=
+                getattr(
+                    form,
+                    "contact_surname",
+                    None
+                ).data
+                if hasattr(
+                    form,
+                    "contact_surname"
+                )
+                else "",
+
+            contact_phone=
+                getattr(
+                    form,
+                    "contact_phone",
+                    None
+                ).data
+                if hasattr(
+                    form,
+                    "contact_phone"
+                )
+                else "",
+
+            contact_email=
+                getattr(
+                    form,
+                    "contact_email",
+                    None
+                ).data
+                if hasattr(
+                    form,
+                    "contact_email"
+                )
+                else current_user.email,
+
+            company_submission_email=
+                settings.submission_email
+                if settings
+                else None,
+
+            field_data=field_data,
+
+            comments=
+                form.comments.data,
+
             status="Submitted",
-            submitted_at=datetime.utcnow()
+
+            submitted_at=
+                datetime.utcnow()
         )
 
         barcode_file = (
@@ -189,7 +397,9 @@ def create():
 
     return render_template(
         "forms/submission_form.html",
-        form=form
+        form=form,
+        dropdown_categories=
+            active_categories
     )
 
 
@@ -211,9 +421,7 @@ def detail(submission_id):
     )
 
 
-@submissions_bp.route(
-    "/drafts"
-)
+@submissions_bp.route("/drafts")
 @login_required
 def drafts():
 
@@ -244,10 +452,12 @@ def pdf(submission_id):
     )
 
     if not submission.pdf_path:
+
         flash(
             "PDF not available.",
             "warning"
         )
+
         return redirect(
             url_for(
                 "submissions.detail",
@@ -273,10 +483,12 @@ def csv(submission_id):
     )
 
     if not submission.csv_path:
+
         flash(
             "CSV not available.",
             "warning"
         )
+
         return redirect(
             url_for(
                 "submissions.detail",
