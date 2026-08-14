@@ -32,6 +32,47 @@ class SubmissionForm(FlaskForm):
         ]
     )
 
+    #
+    # Contact Person Details
+    #
+
+    contact_name = StringField(
+        "First Name",
+        validators=[
+            DataRequired(),
+            Length(max=255)
+        ]
+    )
+
+    contact_surname = StringField(
+        "Surname",
+        validators=[
+            Optional(),
+            Length(max=255)
+        ]
+    )
+
+    contact_phone = StringField(
+        "Contact Number",
+        validators=[
+            Optional(),
+            Length(max=50)
+        ]
+    )
+
+    contact_email = StringField(
+        "Contact Email",
+        validators=[
+            DataRequired(),
+            Email(),
+            Length(max=255)
+        ]
+    )
+
+    #
+    # Sample Information
+    #
+
     sample_description = TextAreaField(
         "Sample Description",
         validators=[
@@ -83,6 +124,10 @@ class SubmissionForm(FlaskForm):
             Length(max=4000)
         ]
     )
+
+    #
+    # Output Options
+    #
 
     generate_pdf = BooleanField(
         "Generate PDF",
