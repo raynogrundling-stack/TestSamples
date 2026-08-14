@@ -38,12 +38,9 @@ Draft Submissions
                     <td>{{ draft.created_at }}</td>
 
                     <td>
-
-                        {{ url_for('submissions.edit',
-                            submission_id=draft.id) }}
-
+                        <a href="{{ url_for('submissions.edit',submission_id=draft.id) }}"
+                        classtd>
                             Continue
-
                         </a>
 
                     </td>
