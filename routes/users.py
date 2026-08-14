@@ -17,6 +17,7 @@ from flask_login import (
 from sqlalchemy import or_
 
 from extensions import db
+
 from models.user import User
 
 from forms.user_forms import (
@@ -44,7 +45,9 @@ def admin_required(func):
             )
 
             return redirect(
-                url_for("main.index")
+                url_for(
+                    "main.index"
+                )
             )
 
         return func(
@@ -79,11 +82,11 @@ def index():
                     f"%{search}%"
                 ),
 
-                User.email.ilike(
+                User.contact_number.ilike(
                     f"%{search}%"
                 ),
 
-                User.contact_number.ilike(
+                User.email.ilike(
                     f"%{search}%"
                 ),
 
@@ -95,7 +98,9 @@ def index():
 
     users = (
         query
-        .order_by(User.name)
+        .order_by(
+            User.name
+        )
         .all()
     )
 
@@ -135,11 +140,18 @@ def create():
             )
 
         user = User(
+
             name=form.name.data,
+
             surname=form.surname.data,
-            contact_number=form.contact_number.data,
+
+            contact_number=
+                form.contact_number.data,
+
             email=form.email.data,
+
             role=form.role.data,
+
             active=form.active.data
         )
 
@@ -155,7 +167,10 @@ def create():
                 "Password123!"
             )
 
-        db.session.add(user)
+        db.session.add(
+            user
+        )
+
         db.session.commit()
 
         flash(
@@ -211,7 +226,9 @@ def edit(id):
                 user=user
             )
 
-        user.name = form.name.data
+        user.name = (
+            form.name.data
+        )
 
         user.surname = (
             form.surname.data
@@ -221,9 +238,13 @@ def edit(id):
             form.contact_number.data
         )
 
-        user.email = form.email.data
+        user.email = (
+            form.email.data
+        )
 
-        user.role = form.role.data
+        user.role = (
+            form.role.data
+        )
 
         user.active = (
             form.active.data
@@ -310,7 +331,10 @@ def delete(id):
             )
         )
 
-    db.session.delete(user)
+    db.session.delete(
+        user
+    )
+
     db.session.commit()
 
     flash(
