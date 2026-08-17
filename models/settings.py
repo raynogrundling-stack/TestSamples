@@ -1,3 +1,6 @@
+from extensions import db
+
+
 class SystemSettings(db.Model):
 
     __tablename__ = "settings"
@@ -27,9 +30,6 @@ class SystemSettings(db.Model):
         db.String(255)
     )
 
-    submission_email = db.Column(
-        db.String(255)
-    )
     submission_email = db.Column(
         db.String(255)
     )
