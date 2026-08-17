@@ -9,8 +9,9 @@ Company Settings
     </h3>
     <div class="card">
         <div class="card-body">
-            <form method="POST"
-                  enctype="multipart/form-data">
+            <form
+                method="POST"
+                enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
                 <div class="mb-3">
                     {{ form.company_name.label(
@@ -33,50 +34,58 @@ Company Settings
                         class="form-control"
                     ) }}
                     <div class="form-text">
+
                         This email address will automatically
-                        be added to submissions.
+                        be included on all submissions.
                     </div>
+                    {% for error in form.submission_email.errors %}
+                    <div class="text-danger">
+                        {{ error }}
+                    </div>
+                    {% endfor %}
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">
+                    <label
+                        for="company_logo"
+                        class="form-label">
                         Company Logo
                     </label>
                     <input
                         type="file"
+                        id="company_logo"
                         name="company_logo"
-                        accept=".png,.jpg,.jpeg,.svg"
-                        class="form-control">
-                    <div class="form-text">
-                        Upload a logo to display beside the company name in the navigation bar.
-                    </div>
+                        class="form-control"
+                        accept=".png,.jpg,.jpeg,.gif,.svg">
                 </div>
                 {% if settings and settings.company_logo %}
-                <div class="mb-4">
-                    <label class="form-label">
+                <div class="mb-3">
+                    <label
+                        class="form-label">
                         Current Logo
                     </label>
                     <div>
-                        <img
-                            src="{{ url_for('static', filename=settings.company_logo) }}"
-                            alt="Company Logo"
-                            class="img-fluid" style="height:100px">
-                    </div>
-                    <div class="form-check">
-                        {{ form.remove_logo(class="form-check-input") }}
-                        {{ form.remove_logo.label(class="form-check-label") }}
-                    </div>
-                    <div class="form-text">
-                        Tick this box to remove the current company logo.
+                        {{ url_for('static', filename=settings.company_logo) }}
                     </div>
                 </div>
+                <div class="form-check mb-3">
+                    {{ form.remove_logo(
+                        class="form-check-input"
+                    ) }}
+                    {{ form.remove_logo.label(
+                        class="form-check-label"
+                    ) }}
+                </div>
                 {% endif %}
-                {{ form.submit(
-                    class="btn btn-primary"
-                ) }}
-                <a href="{{ url_for('settings.index') }}"
-                   class="btn btn-secondary">
-                    Cancel
-                </a>
+                <hr>
+                <div class="mt-3">
+                    {{ form.submit(
+                        class="btn btn-primary"
+                    ) }}
+                    <a href="{{ url_for('settings.index') }}"
+                       class="btn btn-secondary">
+                        Cancel
+                    </a>
+                </div>
             </form>
         </div>
     </div>
