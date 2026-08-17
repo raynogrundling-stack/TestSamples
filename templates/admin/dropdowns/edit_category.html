@@ -5,34 +5,77 @@ Edit Category
 {% block admin_content %}
 <div class="container-fluid">
     <h3 class="mb-4">
-        Edit Category
+        Edit Dropdown Category
     </h3>
     <div class="card">
         <div class="card-body">
             <form method="POST">
                 <div class="mb-3">
-                    <label class="form-label">
+                    <label
+                        class="form-label">
                         Name
                     </label>
-                    <input type="text"
-                           name="name"
-                           class="form-control"
-                           value="{{ category.name }}"
-                           required>
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        value="{{ category.name }}"
+                        required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">
+                    <label
+                        class="form-label">
                         Description
                     </label>
-                    <textarea name="description"
-                              class="form-control">{{ category.description }}</textarea>
+                    <textarea
+                        name="description"
+                        class="form-control"
+                        rows="3">{{ category.description }}</textarea>
+
                 </div>
-                <div class="form-check mb-3">
-                    <input type="checkbox"
-                           name="active"
-                           class="form-check-input"
-                           {% if category.active %}checked{% endif %}>
-                    <label class="form-check-label">
+                <div class="mb-3">
+                    <label
+                        class="form-label">
+                        Field Type
+                    </label>
+                    <select
+                        name="input_type"
+                        class="form-select">
+                        <option
+                            value="dropdown"
+                            {% if category.input_type == "dropdown" %}
+                            selected
+                            {% endif %}>
+                            Single Select Dropdown
+                        </option>
+                        <option
+                            value="checklist"
+                            {% if category.input_type == "checklist" %}
+                            selected
+                            {% endif %}>
+                            Multi Select Checklist
+                        </option>
+                    </select>
+                    <div class="form-text">
+                        Single Select Dropdown allows the user
+                        to choose one option.
+                        <br>
+                        Multi Select Checklist allows the user
+                        to select multiple options.
+                    </div>
+                </div>
+                <div class="form-check mb-4">
+                    <input
+                        type="checkbox"
+                        name="active"
+                        class="form-check-input"
+                        id="active"
+                        {% if category.active %}
+                        checked
+                        {% endif %}>
+                    <label
+                        class="form-check-label"
+                        for="active">
                         Active
                     </label>
                 </div>
@@ -45,6 +88,30 @@ Edit Category
                     Cancel
                 </a>
             </form>
+        </div>
+    </div>
+    <div class="card mt-4">
+        <div class="card-header">
+            Category Information
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <strong>Category ID:</strong>
+                    <br>
+                    {{ category.id }}
+                </div>
+                <div class="col-md-4">
+                    <strong>Created:</strong>
+                    <br>
+                    {{ category.created_at }}
+                </div>
+                <div class="col-md-4">
+                    <strong>Last Updated:</strong>
+                    <br>
+                    {{ category.updated_at }}
+                </div>
+            </div>
         </div>
     </div>
 </div>
