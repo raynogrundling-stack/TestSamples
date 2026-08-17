@@ -427,7 +427,197 @@ def create():
             active_categories
     )
 
+@submissions_bp.route(
+    "/<int:submission_id>/edit",
+    methods=["GET", "POST"]
+)
+@login_required
+def edit(submission_id):
 
+    submission = (
+        Submission.query.get_or_404(
+            submission_id
+        )
+    )
+
+    form = SubmissionForm()
+
+    customers = (
+        Customer.query
+        .filter_by(
+            active=True,
+            deleted=False
+        )
+        .order_by(
+            Customer.customer_name
+        )
+        .all()
+    )
+
+    form.customer_id.choices = [
+        (
+            c.id,
+            c.customer_name
+        )
+        for c in customers
+    ]
+
+    active_categories = (
+        DropdownCategory.query
+        .filter_by(
+            active=True,
+            deleted=False
+        )
+        .order_by(
+            DropdownCategory.name
+        )
+        .all()
+    )
+
+    if request.method == "GET":
+
+        form.customer_id.data = (
+            submission.customer_id
+        )
+
+        form.sample_description.data = (
+            submission.sample_description
+        )
+
+        form.sample_type.data = (
+            submission.sample_type
+        )
+
+        form.test_required.data = (
+            submission.test_required
+        )
+
+        form.results_email.data = (
+            submission.results_email
+        )
+
+        form.comments.data = (
+            submission.comments
+        )
+
+        form.contact_name.data = (
+            submission.contact_name
+        )
+
+        form.contact_surname.data = (
+            submission.contact_surname
+        )
+
+        form.contact_phone.data = (
+            submission.contact_phone
+        )
+
+        form.contact_email.data = (
+            submission.contact_email
+        )
+
+    if form.validate_on_submit():
+
+        customer = Customer.query.get(
+            form.customer_id.data
+        )
+
+        submission.customer_id = (
+            customer.id
+        )
+
+        submission.customer_name = (
+            customer.customer_name
+        )
+
+        submission.sample_description = (
+            form.sample_description.data
+        )
+
+        submission.sample_type = (
+            form.sample_type.data
+        )
+
+        submission.test_required = (
+            form.test_required.data
+        )
+
+        submission.results_email = (
+            form.results_email.data
+        )
+
+        submission.comments = (
+            form.comments.data
+        )
+
+        submission.contact_name = (
+            form.contact_name.data
+        )
+
+        submission.contact_surname = (
+            form.contact_surname.data
+        )
+
+        submission.contact_phone = (
+            form.contact_phone.data
+        )
+
+        submission.contact_email = (
+            form.contact_email.data
+        )
+
+        field_data = {}
+
+        for category in active_categories:
+
+            field_name = (
+                f"dropdown_{category.id}"
+            )
+
+            if (
+                category.input_type
+                == "checklist"
+            ):
+
+                field_data[
+                    category.name
+                ] = request.form.getlist(
+                    field_name
+                )
+
+            else:
+
+                field_data[
+                    category.name
+                ] = request.form.get(
+                    field_name
+                )
+
+        submission.field_data = (
+            field_data
+        )
+
+        db.session.commit()
+
+        flash(
+            "Submission updated successfully.",
+            "success"
+        )
+
+        return redirect(
+            url_for(
+                "submissions.detail",
+                submission_id=submission.id
+            )
+        )
+
+    return render_template(
+        "forms/submission_form.html",
+        form=form,
+        submission=submission,
+        dropdown_categories=
+            active_categories
+    )
 @submissions_bp.route(
     "/<int:submission_id>"
 )
