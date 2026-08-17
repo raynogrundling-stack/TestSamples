@@ -94,8 +94,7 @@ def company():
         settings.company_name = (
             form.company_name.data
         )
-
-       settings.submission_email = (
+        settings.submission_email = (
             form.submission_email.data
         )
         logo = request.files.get(
